@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import PlatformTabs from '../../components/PlatformTabs.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+const switchGames = allGames.filter(g => g.data.platforms.includes('switch'));
+
+const counts = {
+  all: allGames.length,
+  switch: switchGames.length,
+  '3ds': allGames.filter(g => g.data.platforms.some(p => p === '3ds' || p === 'ds')).length,
+  downloadPlay: allGames.filter(g => g.data.coop.downloadPlay).length,
+};
+
+const initial = switchGames
+  .sort((a, b) => {
+    if (a.data.curatorPick !== b.data.curatorPick) return b.data.curatorPick ? 1 : -1;
+    return a.data.title.localeCompare(b.data.title);
+  })
+  .slice(0, 36);
+---
+
+<BaseLayout title="Nintendo Switch Co-Op Games — DuoPlay" description="Browse all verified local couch and online co-op games for Nintendo Switch.">
+  <main class="container page-content">
+    <section class="hero-header">
+      <h1>Nintendo Switch Co-Op Games</h1>
+      <p>Browse same-screen Joy-Con sharing, split-screen couch adventures, and online co-op squads.</p>
+    </section>
+
+    <PlatformTabs counts={counts} activePlatform="switch" />
+
+    <div class="games-grid">
+      {initial.map(g => (
+        <GameCard game={g.data} />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-content { padding-top: 40px; }
+  .hero-header { margin-bottom: 24px; }
+  .hero-header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; }
+  .hero-header p { color: var(--text-muted); font-size: 1.05rem; }
+  .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+</style>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import PlatformTabs from '../../components/PlatformTabs.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+const ctrGames = allGames.filter(g => g.data.platforms.some(p => p === '3ds' || p === 'ds'));
+
+const counts = {
+  all: allGames.length,
+  switch: allGames.filter(g => g.data.platforms.includes('switch')).length,
+  '3ds': ctrGames.length,
+  downloadPlay: allGames.filter(g => g.data.coop.downloadPlay).length,
+};
+
+const initial = ctrGames.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title="Nintendo 3DS & DS Co-Op Games — DuoPlay" description="Explore local wireless and Download Play multiplayer titles on Nintendo 3DS and DS.">
+  <main class="container page-content">
+    <section class="hero-header">
+      <h1>Nintendo 3DS & DS Multiplayer Games</h1>
+      <p>Local wireless multiplayer and single-cartridge adventures on Nintendo 3DS and compatible DS games.</p>
+    </section>
+
+    <PlatformTabs counts={counts} activePlatform="3ds" />
+
+    <div class="games-grid">
+      {initial.map(g => (
+        <GameCard game={g.data} />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-content { padding-top: 40px; }
+  .hero-header { margin-bottom: 24px; }
+  .hero-header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; }
+  .hero-header p { color: var(--text-muted); font-size: 1.05rem; }
+  .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+</style>

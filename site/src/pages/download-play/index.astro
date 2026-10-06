@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import GameCard from '../../components/GameCard.astro';
+import PlatformTabs from '../../components/PlatformTabs.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+const dlGames = allGames.filter(g => g.data.coop.downloadPlay);
+
+const counts = {
+  all: allGames.length,
+  switch: allGames.filter(g => g.data.platforms.includes('switch')).length,
+  '3ds': allGames.filter(g => g.data.platforms.some(p => p === '3ds' || p === 'ds')).length,
+  downloadPlay: dlGames.length,
+};
+
+const initial = dlGames.sort((a, b) => a.data.title.localeCompare(b.data.title));
+---
+
+<BaseLayout title="Nintendo 3DS Single-Cart Download Play Games — DuoPlay" description="All Nintendo 3DS and DS games where multiple players can play together wirelessly using only one cartridge.">
+  <main class="container page-content">
+    <section class="hero-header">
+      <h1>⚡ Single-Cartridge Download Play Games</h1>
+      <p>Only one person needs the game card! Friends connect wirelessly from their Nintendo 3DS HOME menu.</p>
+    </section>
+
+    <PlatformTabs counts={counts} activePlatform="download-play" />
+
+    <div class="games-grid">
+      {initial.map(g => (
+        <GameCard game={g.data} />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-content { padding-top: 40px; }
+  .hero-header { margin-bottom: 24px; }
+  .hero-header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 8px; }
+  .hero-header p { color: var(--text-muted); font-size: 1.05rem; }
+  .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+</style>

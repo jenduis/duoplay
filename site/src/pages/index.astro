@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GameCard from '../components/GameCard.astro';
+import PlatformTabs from '../components/PlatformTabs.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+
+const counts = {
+  all: allGames.length,
+  switch: allGames.filter(g => g.data.platforms.includes('switch')).length,
+  '3ds': allGames.filter(g => g.data.platforms.some(p => p === '3ds' || p === 'ds')).length,
+  downloadPlay: allGames.filter(g => g.data.coop.downloadPlay).length,
+};
+
+// Initial SSR top 36 games
+const initialGames = allGames
+  .sort((a, b) => {
+    if (a.data.curatorPick !== b.data.curatorPick) return b.data.curatorPick ? 1 : -1;
+    return a.data.title.localeCompare(b.data.title);
+  })
+  .slice(0, 36);
+---
+
+<BaseLayout>
+  <main class="container page-content">
+    <section class="hero-header">
+      <h1>Nintendo Switch & 3DS Co-Op Games</h1>
+      <p>Discover couch co-op, local wireless, and single-cartridge Download Play multiplayer adventures.</p>
+    </section>
+
+    <PlatformTabs counts={counts} activePlatform="all" />
+
+    <!-- Filter Bar Controls -->
+    <div class="filter-bar">
+      <div class="search-box">
+        <input type="text" id="catalogSearch" placeholder="Search by title, genre, keyword..." />
+      </div>
+
+      <div class="filters-row">
+        <select id="filterStyle">
+          <option value="all">All Play Styles</option>
+          <option value="same-screen">Same-Screen Couch</option>
+          <option value="split-screen">Split-Screen Couch</option>
+          <option value="local-wireless">Local Wireless</option>
+          <option value="download-play">⚡ 1-Cart Download Play</option>
+          <option value="online">Online / LAN</option>
+        </select>
+
+        <select id="filterVibe">
+          <option value="all">All Vibes</option>
+          <option value="Cozy">Cozy</option>
+          <option value="Story">Story</option>
+          <option value="Chaos">Chaos</option>
+          <option value="Puzzle">Puzzle</option>
+          <option value="Action">Action</option>
+          <option value="Competitive">Competitive</option>
+        </select>
+
+        <select id="filterAudience">
+          <option value="all">Any Audience</option>
+          <option value="couples">Couples / Partners</option>
+          <option value="friends">Friends</option>
+          <option value="kids">Kids</option>
+          <option value="family">Family</option>
+          <option value="party">Party</option>
+        </select>
+
+        <label class="checkbox-label">
+          <input type="checkbox" id="filterCampaign" /> Co-Op Campaign Only
+        </label>
+      </div>
+
+      <div class="results-meta">
+        <span>Showing <strong id="visibleCount">{initialGames.length}</strong> of {allGames.length} titles</span>
+      </div>
+    </div>
+
+    <!-- Games Grid -->
+    <div class="games-grid" id="catalogGrid">
+      {initialGames.map(g => (
+        <GameCard game={g.data} />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<script>
+  import { filterAndSortGames, type SlimGame, type FilterState } from '../scripts/filters';
+
+  let gamesData: SlimGame[] = [];
+  const grid = document.getElementById('catalogGrid')!;
+  const countEl = document.getElementById('visibleCount')!;
+  const searchInput = document.getElementById('catalogSearch') as HTMLInputElement;
+  const styleSelect = document.getElementById('filterStyle') as HTMLSelectElement;
+  const vibeSelect = document.getElementById('filterVibe') as HTMLSelectElement;
+  const audienceSelect = document.getElementById('filterAudience') as HTMLSelectElement;
+  const campaignCheck = document.getElementById('filterCampaign') as HTMLInputElement;
+
+  async function init() {
+    try {
+      const res = await fetch('/games.index.json');
+      gamesData = await res.json();
+    } catch (e) {
+      console.warn('Failed to fetch catalog index', e);
+    }
+  }
+
+  function applyFilters() {
+    if (!gamesData.length) return;
+
+    const state: FilterState = {
+      platform: 'all',
+      playStyle: styleSelect.value,
+      campaignOnly: campaignCheck.checked,
+      minPlayers: 1,
+      vibe: vibeSelect.value,
+      difficulty: 'all',
+      audience: audienceSelect.value,
+      search: searchInput.value,
+      sort: 'curator',
+    };
+
+    const filtered = filterAndSortGames(gamesData, state);
+    countEl.textContent = String(filtered.length);
+
+    grid.innerHTML = filtered.slice(0, 48).map(g => `
+      <article class="game-card" data-id="${g.id}">
+        <div class="card-header">
+          <div class="badge-group">
+            ${g.platforms.map(p => `<span class="badge ${p}">${p.toUpperCase()}</span>`).join('')}
+            ${g.curatorPick ? '<span class="badge curator">★ Top Pick</span>' : ''}
+            ${g.coop.downloadPlay ? '<span class="badge ds">⚡ 1-Cart Play</span>' : ''}
+          </div>
+        </div>
+
+        <div class="card-media">
+          ${g.coverUrl ? `<img src="${g.coverUrl}" alt="${g.title} cover" loading="lazy" class="card-cover" />` : '<div class="card-cover-placeholder">🎮</div>'}
+          <div class="card-info">
+            <h3 class="card-title"><a href="/games/${g.id}/">${g.title}</a></h3>
+            <div class="card-specs">
+              <span>👥 ${g.maxPlayers ? `${g.maxPlayers} Players` : 'Multiplayer'}</span> • 
+              <span>🎭 ${g.vibe}</span>
+            </div>
+          </div>
+        </div>
+
+        <p class="card-summary">${g.summary}</p>
+
+        <div class="card-footer">
+          <span class="difficulty-tag">${g.difficulty}</span>
+          <a href="/games/${g.id}/" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">
+            Details ➔
+          </a>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  searchInput?.addEventListener('input', applyFilters);
+  styleSelect?.addEventListener('change', applyFilters);
+  vibeSelect?.addEventListener('change', applyFilters);
+  audienceSelect?.addEventListener('change', applyFilters);
+  campaignCheck?.addEventListener('change', applyFilters);
+
+  init();
+</script>
+
+<style>
+  .page-content {
+    padding-top: 40px;
+  }
+  .hero-header {
+    margin-bottom: 24px;
+  }
+  .hero-header h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .hero-header p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+  .filter-bar {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .search-box input {
+    width: 100%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+  }
+  .filters-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .filters-row select {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.875rem;
+  }
+  .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+  .results-meta {
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+  }
+  .games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+</style>

@@ -1,0 +1,144 @@
+---
+interface Props {
+  game: {
+    id: string;
+    title: string;
+    platforms: string[];
+    maxPlayers: number | null;
+    coop: {
+      campaign: boolean;
+      local: { sameScreen: boolean; splitScreen: boolean };
+      downloadPlay: boolean;
+    };
+    editorial: {
+      summary: string;
+      vibe: string;
+      difficulty: string;
+      coopSummary: string;
+    };
+    cover: { url: string } | null;
+    curatorPick: boolean;
+  };
+}
+
+const { game } = Astro.props;
+---
+
+<article class="game-card" data-id={game.id}>
+  <div class="card-header">
+    <div class="badge-group">
+      {game.platforms.map(p => (
+        <span class={`badge ${p}`}>{p.toUpperCase()}</span>
+      ))}
+      {game.curatorPick && <span class="badge curator">★ Top Pick</span>}
+      {game.coop.downloadPlay && <span class="badge ds">⚡ 1-Cart Play</span>}
+    </div>
+  </div>
+
+  <div class="card-media">
+    {game.cover ? (
+      <img src={game.cover.url} alt={`${game.title} cover`} loading="lazy" class="card-cover" />
+    ) : (
+      <div class="card-cover-placeholder">🎮</div>
+    )}
+    <div class="card-info">
+      <h3 class="card-title"><a href={`/games/${game.id}/`}>{game.title}</a></h3>
+      <div class="card-specs">
+        <span>👥 {game.maxPlayers ? `${game.maxPlayers} Players` : 'Multiplayer'}</span> • 
+        <span>🎭 {game.editorial.vibe}</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="card-summary">{game.editorial.summary}</p>
+
+  <div class="card-footer">
+    <span class="difficulty-tag">{game.editorial.difficulty}</span>
+    <a href={`/games/${game.id}/`} class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">
+      Details ➔
+    </a>
+  </div>
+</article>
+
+<style>
+  .game-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .game-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-active);
+    background: var(--bg-card-hover);
+  }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .badge-group {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .card-media {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+  }
+  .card-cover {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    object-fit: cover;
+    background: var(--bg-elevated);
+    flex-shrink: 0;
+  }
+  .card-cover-placeholder {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-sm);
+    background: var(--bg-elevated);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+  .card-title a:hover {
+    color: var(--switch-blue);
+  }
+  .card-specs {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 3px;
+  }
+  .card-summary {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    flex-grow: 1;
+  }
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 8px;
+    border-top: 1px solid var(--border-color);
+  }
+  .difficulty-tag {
+    font-size: 0.775rem;
+    color: var(--text-subtle);
+    font-weight: 600;
+  }
+</style>
