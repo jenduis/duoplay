@@ -1,15 +1,50 @@
 # Human overrides — highest precedence in the pipeline (applied after Gemini enrichment).
 # Keyed by game id (slug). Any schema field may be set; nested objects are deep-merged.
-#
-# Example:
-# mario-kart-7:
-#   coop:
-#     downloadPlay: true
-#   editorial:
-#     coopSummary: "Up to 8 racers locally; friends without the game join via Download Play as Shy Guy."
-#     reviewed: true
-#
-# To hide a game from the site entirely:
-# some-game-id:
-#   _exclude: true
-{}
+
+it-takes-two:
+  coop:
+    campaign: true
+    local:
+      sameScreen: true
+      splitScreen: true
+  editorial:
+    vibe: "Story"
+    difficulty: "Medium"
+    audiences: ["couples", "friends"]
+    reviewed: true
+
+mario-kart-8-deluxe:
+  coop:
+    campaign: false
+    local:
+      sameScreen: false
+      splitScreen: true
+  editorial:
+    vibe: "Chaos"
+    difficulty: "Low"
+    audiences: ["friends", "family", "party"]
+    reviewed: true
+
+snipperclips-cut-it-out-together:
+  coop:
+    campaign: true
+    local:
+      sameScreen: true
+      splitScreen: false
+  editorial:
+    vibe: "Puzzle"
+    difficulty: "Low"
+    audiences: ["couples", "friends", "family"]
+    reviewed: true
+
+overcooked-2:
+  coop:
+    campaign: true
+    local:
+      sameScreen: true
+      splitScreen: false
+  editorial:
+    vibe: "Chaos"
+    difficulty: "Medium"
+    audiences: ["couples", "friends", "party"]
+    reviewed: true
