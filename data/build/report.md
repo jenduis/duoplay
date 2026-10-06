@@ -1,6 +1,6 @@
 # DuoPlay Database Compilation Report
 
-**Generated at:** 2026-10-06T11:44:56.421752+00:00
+**Generated at:** 2026-10-06T12:02:17.955457+00:00
 
 ## Summary Metrics
 - **Total Games Compiled:** 2136
