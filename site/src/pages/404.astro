@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found (404) — DuoPlay"
+  description="Sorry, this page could not be found."
+>
+  <main class="container" style="padding-top: 80px; padding-bottom: 120px; text-align: center; max-width: 600px;">
+    <div style="font-size: 4.5rem; margin-bottom: 16px;">👾</div>
+    <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 16px;">404 — Stage Not Found</h1>
+    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; margin-bottom: 32px;">
+      The co-op adventure you're looking for seems to have disconnected or moved to another console.
+    </p>
+
+    <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+      <a href="/" class="btn btn-primary">Browse All Games ➔</a>
+      <a href="/matchmaker/" class="btn btn-secondary">Try Matchmaker</a>
+      <a href="/guides/" class="btn btn-secondary">Read Guides</a>
+    </div>
+  </main>
+</BaseLayout>

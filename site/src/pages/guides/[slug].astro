@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((guide) => ({
+    params: { slug: guide.id },
+    props: { guide },
+  }));
+}
+
+const { guide } = Astro.props;
+const { Content } = await render(guide);
+---
+
+<BaseLayout
+  title={`${guide.data.title} — DuoPlay Guide`}
+  description={guide.data.description}
+>
+  <main class="container" style="padding-top: 40px; padding-bottom: 80px; max-width: 800px;">
+    <div style="margin-bottom: 24px;">
+      <a href="/guides/" style="display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted); font-size: 0.9rem; text-decoration: none;">
+        &larr; Back to all guides
+      </a>
+    </div>
+
+    <header class="card-panel" style="margin-bottom: 32px; border-radius: var(--radius-lg); padding: 32px;">
+      <div style="font-size: 3rem; margin-bottom: 16px;">{guide.data.icon}</div>
+      <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.2; margin-bottom: 12px;">{guide.data.title}</h1>
+      <p style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.5; margin: 0;">{guide.data.description}</p>
+    </header>
+
+    <article class="prose">
+      <Content />
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .prose {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .prose :global(h1) {
+    display: none; /* Already rendered in header */
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 36px;
+    margin-bottom: 16px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 8px;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 20px;
+  }
+
+  .prose :global(ul), .prose :global(ol) {
+    margin-bottom: 24px;
+    padding-left: 24px;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 8px;
+  }
+
+  .prose :global(a) {
+    color: var(--cyan);
+    font-weight: 500;
+    text-decoration: underline;
+  }
+
+  .prose :global(a:hover) {
+    color: var(--cyan-hover);
+  }
+
+  .prose :global(strong) {
+    color: #fff;
+  }
+</style>

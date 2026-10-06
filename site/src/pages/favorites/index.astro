@@ -1,0 +1,199 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+
+// Build lightweight lookup index
+const gamesIndex = allGames.map(entry => ({
+  id: entry.data.id,
+  title: entry.data.title,
+  platforms: entry.data.platforms,
+  maxPlayers: entry.data.maxPlayers,
+  coverUrl: entry.data.cover?.url ?? null,
+  coopSummary: entry.data.editorial.coopSummary,
+  setupGuide: entry.data.editorial.setupGuide,
+  vibe: entry.data.editorial.vibe,
+}));
+---
+
+<BaseLayout
+  title="Saved Co-Op Games — DuoPlay"
+  description="Your curated list of saved Nintendo Switch and 3DS multiplayer games."
+>
+  <main class="container" style="padding-top: 40px; padding-bottom: 80px; max-width: 900px;">
+    <div style="display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; border-bottom: 1px solid var(--border); padding-bottom: 20px;">
+      <div>
+        <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 6px;">Saved Games</h1>
+        <p style="color: var(--text-muted); font-size: 1rem; margin: 0;">
+          Your personalized shortlist for game night.
+        </p>
+      </div>
+
+      <div style="display: flex; gap: 10px;">
+        <button id="copyShareLinkBtn" class="btn btn-secondary btn-sm">
+          🔗 Copy Share Link
+        </button>
+        <button id="exportTextBtn" class="btn btn-secondary btn-sm">
+          📋 Copy List (Text)
+        </button>
+        <button id="clearAllBtn" class="btn btn-secondary btn-sm" style="color: var(--red);">
+          🗑️ Clear All
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div id="emptyFavoritesState" class="card-panel" style="display: none; text-align: center; padding: 60px 20px; border-radius: var(--radius-lg);">
+      <div style="font-size: 3rem; margin-bottom: 16px;">⭐</div>
+      <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 10px;">No saved games yet</h2>
+      <p style="color: var(--text-muted); max-width: 480px; margin: 0 auto 24px;">
+        Browse the catalog or use the matchmaker, then click "Save to favorites" on any game to build your wishlist!
+      </p>
+      <a href="/" class="btn btn-primary">Browse All Co-Op Games ➔</a>
+    </div>
+
+    <!-- Favorites Grid -->
+    <div id="favoritesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+      <!-- Populated via client script -->
+    </div>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ gamesIndex }}>
+  window.__GAMES_INDEX__ = gamesIndex;
+</script>
+
+<script>
+  import { getFavorites, saveFavorites, clearFavorites } from '../../scripts/favorites';
+
+  const emptyState = document.getElementById('emptyFavoritesState');
+  const favGrid = document.getElementById('favoritesGrid');
+  const copyShareBtn = document.getElementById('copyShareLinkBtn');
+  const exportTextBtn = document.getElementById('exportTextBtn');
+  const clearAllBtn = document.getElementById('clearAllBtn');
+
+  // Check URL params for shared list (?ids=game1,game2)
+  const urlParams = new URLSearchParams(window.location.search);
+  const sharedIds = urlParams.get('ids');
+  if (sharedIds) {
+    const ids = sharedIds.split(',').filter(Boolean);
+    if (ids.length > 0) {
+      const existing = getFavorites();
+      const merged = Array.from(new Set([...existing, ...ids]));
+      saveFavorites(merged);
+      // Clean query parameter from URL without reload
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+  }
+
+  function renderFavorites() {
+    const favIds = getFavorites();
+    const games = (window as any).__GAMES_INDEX__ || [];
+    const savedGames = games.filter((g: any) => favIds.includes(g.id));
+
+    if (savedGames.length === 0) {
+      if (emptyState) emptyState.style.display = 'block';
+      if (favGrid) favGrid.innerHTML = '';
+      return;
+    }
+
+    if (emptyState) emptyState.style.display = 'none';
+    if (!favGrid) return;
+
+    favGrid.innerHTML = savedGames.map((g: any) => {
+      const coverHtml = g.coverUrl
+        ? `<img src="${g.coverUrl}" alt="${g.title}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius-md) var(--radius-md) 0 0;" loading="lazy" />`
+        : `<div style="width: 100%; aspect-ratio: 16/9; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-radius: var(--radius-md) var(--radius-md) 0 0;">🎮</div>`;
+
+      return `
+        <div class="card-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-lg); position: relative;">
+          ${coverHtml}
+          <div style="padding: 16px; display: flex; flex-direction: column; flex-grow: 1;">
+            <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+              ${g.platforms.map((p: string) => `<span class="badge badge-${p}">${p.toUpperCase()}</span>`).join('')}
+              <span class="badge badge-players">${g.maxPlayers ? `${g.maxPlayers}P` : 'Co-Op'}</span>
+            </div>
+
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">
+              <a href="/games/${g.id}/" style="color: inherit; text-decoration: none;">${g.title}</a>
+            </h3>
+
+            <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; flex-grow: 1;">
+              ${g.coopSummary}
+            </p>
+
+            <div style="display: flex; gap: 8px; margin-top: auto;">
+              <a href="/games/${g.id}/" class="btn btn-secondary btn-sm" style="flex: 1; text-align: center; text-decoration: none;">
+                Details ➔
+              </a>
+              <button class="btn btn-secondary btn-sm remove-fav-btn" data-id="${g.id}" title="Remove from saved" style="color: var(--red);">
+                ✕
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Remove handler
+  favGrid?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('.remove-fav-btn') as HTMLElement;
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (id) {
+      const favs = getFavorites().filter(item => item !== id);
+      saveFavorites(favs);
+      renderFavorites();
+    }
+  });
+
+  // Clear all handler
+  clearAllBtn?.addEventListener('click', () => {
+    if (confirm('Clear all saved games?')) {
+      clearFavorites();
+      renderFavorites();
+    }
+  });
+
+  // Share link copy
+  copyShareBtn?.addEventListener('click', async () => {
+    const favs = getFavorites();
+    if (favs.length === 0) {
+      alert('Save some games first to share your list!');
+      return;
+    }
+    const shareUrl = `${window.location.origin}/favorites/?ids=${favs.join(',')}`;
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      copyShareBtn.textContent = '✓ Copied URL!';
+      setTimeout(() => { copyShareBtn.textContent = '🔗 Copy Share Link'; }, 2000);
+    } catch {
+      prompt('Copy this link to share your saved games:', shareUrl);
+    }
+  });
+
+  // Export plain text
+  exportTextBtn?.addEventListener('click', async () => {
+    const favIds = getFavorites();
+    const games = (window as any).__GAMES_INDEX__ || [];
+    const savedGames = games.filter((g: any) => favIds.includes(g.id));
+    if (savedGames.length === 0) {
+      alert('No games saved to copy.');
+      return;
+    }
+
+    const text = savedGames.map((g: any) => `• ${g.title} (${g.platforms.join(', ').toUpperCase()}) - ${window.location.origin}/games/${g.id}/`).join('\n');
+    try {
+      await navigator.clipboard.writeText(text);
+      exportTextBtn.textContent = '✓ Copied List!';
+      setTimeout(() => { exportTextBtn.textContent = '📋 Copy List (Text)'; }, 2000);
+    } catch {
+      prompt('Copy your games list:', text);
+    }
+  });
+
+  renderFavorites();
+  window.addEventListener('storage', renderFavorites);
+</script>

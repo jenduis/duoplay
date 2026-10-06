@@ -1,0 +1,258 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGames = await getCollection('games');
+
+// Pre-serialize only matchmaker fields to keep client payload minimal
+const matchmakerPool = allGames.map(entry => ({
+  id: entry.data.id,
+  title: entry.data.title,
+  platforms: entry.data.platforms,
+  maxPlayers: entry.data.maxPlayers,
+  coop: {
+    campaign: entry.data.coop.campaign,
+    localMax: entry.data.coop.local.max,
+    sameScreen: entry.data.coop.local.sameScreen,
+    splitScreen: entry.data.coop.local.splitScreen,
+    localWirelessMax: entry.data.coop.localWireless.max,
+    onlineMax: entry.data.coop.online.max,
+    downloadPlay: entry.data.coop.downloadPlay,
+    gameShare: entry.data.coop.gameShare,
+    dropInOut: entry.data.coop.dropInOut,
+  },
+  editorial: {
+    summary: entry.data.editorial.summary,
+    coopSummary: entry.data.editorial.coopSummary,
+    setupGuide: entry.data.editorial.setupGuide,
+    vibe: entry.data.editorial.vibe,
+    difficulty: entry.data.editorial.difficulty,
+    audiences: entry.data.editorial.audiences,
+  },
+  coverUrl: entry.data.cover?.url ?? null,
+  curatorPick: entry.data.curatorPick,
+}));
+---
+
+<BaseLayout
+  title="Nintendo Switch & 3DS Co-Op Matchmaker — DuoPlay"
+  description="Find your next co-op game tailored to your exact hardware setup, player skill level, and vibe."
+>
+  <main class="container" style="padding-top: 40px; padding-bottom: 80px; max-width: 860px;">
+    <header style="text-align: center; margin-bottom: 40px;">
+      <div style="font-size: 3rem; margin-bottom: 12px;">🤝</div>
+      <h1 style="font-size: 2.3rem; font-weight: 800; margin-bottom: 12px;">The DuoPlay Matchmaker</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">
+        Tell us who you're playing with, what consoles you have, and your preferred vibe. We'll find the ideal match with clear setup instructions.
+      </p>
+    </header>
+
+    <!-- Quiz Card -->
+    <div class="card-panel" style="padding: 32px; border-radius: var(--radius-lg); margin-bottom: 40px;">
+      <form id="matchmakerForm">
+        <!-- Q1: Hardware -->
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label style="display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: var(--text);">
+            1. What console setup do you have?
+          </label>
+          <div class="pill-group" data-name="hardware" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="btn btn-secondary pill active" data-val="1-switch">
+              🕹️ 1 Switch (Sharing 1 TV / Joy-Cons)
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="2-switch">
+              📡 2 Switches (Local Wireless or Online)
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="switch2">
+              ✨ Switch 2 / GameShare
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="1-3ds-dlplay">
+              ⚡ 1 3DS Cartridge (Friend uses Download Play)
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="2-3ds">
+              🎮 2 3DS/DS Consoles (Both have games)
+            </button>
+          </div>
+        </div>
+
+        <!-- Q2: Player 2 Skill -->
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label style="display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: var(--text);">
+            2. Player 2's gaming experience level:
+          </label>
+          <div class="pill-group" data-name="experience" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="btn btn-secondary pill active" data-val="beginner">
+              🐣 Complete Beginner (Needs forgiving controls)
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="casual">
+              ☕ Casual (Enjoys games, prefers low stress)
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="gamer">
+              ⚔️ Experienced Gamer (Loves challenge & depth)
+            </button>
+          </div>
+        </div>
+
+        <!-- Q3: Who's Playing -->
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label style="display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: var(--text);">
+            3. Who are you playing with?
+          </label>
+          <div class="pill-group" data-name="audience" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="btn btn-secondary pill active" data-val="partner">
+              ❤️ Partner / Couple
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="friends">
+              👯 Best Friends
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="kids">
+              🧸 Kids / Family
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="party">
+              🎉 Party / Group
+            </button>
+          </div>
+        </div>
+
+        <!-- Q4: Preferred Vibe -->
+        <div class="form-group" style="margin-bottom: 32px;">
+          <label style="display: block; font-weight: 700; font-size: 1.05rem; margin-bottom: 12px; color: var(--text);">
+            4. What vibe are you feeling?
+          </label>
+          <div class="pill-group" data-name="vibe" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <button type="button" class="btn btn-secondary pill active" data-val="any">
+              🎲 Any Vibe
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="cozy">
+              ☕ Cozy & Relaxing
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="story">
+              📖 Story & Narrative
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="chaos">
+              💥 Laugh-Out-Loud Chaos
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="puzzle">
+              🧩 Clever Puzzles
+            </button>
+            <button type="button" class="btn btn-secondary pill" data-val="action">
+              ⚔️ Fast-Paced Action
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1.1rem; font-weight: 700;">
+          Find Recommended Matches ➔
+        </button>
+      </form>
+    </div>
+
+    <!-- Match Results Container -->
+    <section id="resultsSection" style="display: none;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px;">
+        <h2 style="font-size: 1.8rem; font-weight: 800;">Top Recommendations</h2>
+        <span id="matchStats" style="color: var(--text-muted); font-size: 0.9rem;"></span>
+      </div>
+
+      <div id="matchesGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px;">
+        <!-- Injected via client script -->
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script define:vars={{ matchmakerPool }}>
+  window.__MATCHMAKER_POOL__ = matchmakerPool;
+</script>
+
+<script>
+  import { evaluateMatches, type MatchmakerAnswers, type MatchmakerGame } from '../../scripts/matchmaker';
+
+  const form = document.getElementById('matchmakerForm') as HTMLFormElement;
+  const resultsSection = document.getElementById('resultsSection');
+  const matchesGrid = document.getElementById('matchesGrid');
+  const matchStats = document.getElementById('matchStats');
+
+  // Pill click handler
+  document.querySelectorAll('.pill-group').forEach(group => {
+    group.addEventListener('click', (e) => {
+      const btn = (e.target as HTMLElement).closest('.pill');
+      if (!btn) return;
+      group.querySelectorAll('.pill').forEach(p => p.classList.remove('active', 'btn-primary'));
+      btn.classList.add('active');
+    });
+  });
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const answers: MatchmakerAnswers = {
+      hardware: document.querySelector('.pill-group[data-name="hardware"] .pill.active')?.getAttribute('data-val') || '1-switch',
+      experience: document.querySelector('.pill-group[data-name="experience"] .pill.active')?.getAttribute('data-val') || 'beginner',
+      audience: document.querySelector('.pill-group[data-name="audience"] .pill.active')?.getAttribute('data-val') || 'partner',
+      vibe: document.querySelector('.pill-group[data-name="vibe"] .pill.active')?.getAttribute('data-val') || 'any',
+    };
+
+    const pool = (window as any).__MATCHMAKER_POOL__ as MatchmakerGame[];
+    const matches = evaluateMatches(pool, answers);
+
+    if (!resultsSection || !matchesGrid) return;
+
+    if (matches.length === 0) {
+      matchesGrid.innerHTML = `
+        <div class="card-panel" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+          <p style="font-size: 1.2rem; color: var(--text-muted);">No exact matches found for this combination. Try broadening your vibe or experience criteria!</p>
+        </div>
+      `;
+    } else {
+      matchesGrid.innerHTML = matches.map(({ game, reasons }, idx) => {
+        const coverHtml = game.coverUrl
+          ? `<img src="${game.coverUrl}" alt="${game.title}" style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius-md) var(--radius-md) 0 0;" loading="lazy" />`
+          : `<div style="width: 100%; aspect-ratio: 16/9; background: var(--bg-card); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; border-radius: var(--radius-md) var(--radius-md) 0 0;">🎮</div>`;
+
+        return `
+          <div class="card-panel" style="display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-lg); border-color: ${idx === 0 ? 'var(--cyan)' : 'var(--border)'};">
+            ${coverHtml}
+            <div style="padding: 16px; display: flex; flex-direction: column; flex-grow: 1;">
+              <div style="display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap;">
+                ${game.platforms.map(p => `<span class="badge badge-${p}">${p.toUpperCase()}</span>`).join('')}
+                ${idx === 0 ? '<span class="badge" style="background: rgba(0,210,255,0.15); color: var(--cyan); border-color: var(--cyan);">Top Pick</span>' : ''}
+              </div>
+
+              <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 8px;">
+                <a href="/games/${game.id}/" style="color: inherit; text-decoration: none;">${game.title}</a>
+              </h3>
+
+              <div style="margin-bottom: 12px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.4;">
+                ${reasons.map(r => `<div style="color: var(--green); display: flex; align-items: center; gap: 4px;">✓ ${r}</div>`).join('')}
+              </div>
+
+              <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; flex-grow: 1;">
+                ${game.editorial.coopSummary}
+              </p>
+
+              <div style="font-size: 0.8rem; background: rgba(255,255,255,0.03); border-left: 2px solid var(--cyan); padding: 8px 10px; border-radius: 4px; margin-bottom: 16px;">
+                <strong>Setup:</strong> ${game.editorial.setupGuide}
+              </div>
+
+              <a href="/games/${game.id}/" class="btn btn-secondary btn-sm" style="text-align: center; text-decoration: none;">
+                View Full Breakdown ➔
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    resultsSection.style.display = 'block';
+    resultsSection.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
+<style>
+  .pill.active {
+    background: var(--cyan);
+    color: #0b0f19;
+    font-weight: 700;
+    border-color: var(--cyan);
+  }
+</style>

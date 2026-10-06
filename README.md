@@ -1,72 +1,105 @@
-# DuoPlay & Multiplayer Scrapers - Claude Code Workspace
+# DuoPlay — Nintendo Switch & 3DS Co-Op Finder
 
-This workspace contains all assets, scrapers, datasets, and the web application built during the session.
+**DuoPlay** (`https://duoplay.vercel.app`) is a fast, static website listing **Nintendo Switch, Switch 2, Nintendo 3DS, and Nintendo DS cooperative & multiplayer games**, with a dedicated static page for every title.
 
-## Directory Structure
+Data is gathered from verified community archives and normalized via a reproducible Python pipeline. Gemini is utilized strictly for editorial prose (summaries, co-op mechanics breakdowns, and setup guides)—never for hallucinating factual player counts or hardware support.
+
+---
+
+## Architecture & Layout
 
 ```
-├── CLAUDE.md                        # Quick instructions and commands for Claude Code
-├── README.md                        # General project documentation
-├── duoplay-app/                     # Complete web application (Vercel-ready)
-│   ├── index.html                   # Inclusive, multi-console responsive interface
-│   ├── styles.css                   # Modern dark neon theme & card layouts
-│   ├── app.js                       # Client-side multi-filtering, search, & pagination
-│   ├── data.js                      # JavaScript database (2,269 games)
-│   ├── games.json                   # Raw JSON database (2,269 games)
-│   ├── package.json                 # Node metadata
-│   ├── vercel.json                  # Vercel deployment config (outputDirectory: .)
-│   └── public/                      # Mirrored static assets for Vercel
-├── scrapers/                        # Python CLI scraping tools
-│   ├── coop_scrapers.py             # Scraper for Co-Optimus, Megalist, Nucleus & covers
-│   ├── nx_content_scraper.py        # Scraper for GhostLand / NLib API
-│   └── requirements.txt             # Python dependencies (requests, beautifulsoup4)
-├── browser-snippets/                # Browser DevTools console scrapers (F12)
-│   ├── backloggd_scraper.js         # Scrapes all 24 pages of Backloggd lists
-│   ├── cooptimus_setpage_scraper.js # Scrapes all 84 pages of Co-Optimus via native setPage()
-│   ├── ghostland_nx_scraper.js      # Extracts Switch Title IDs & player counts from NLib API
-│   └── megalist_scraper.js          # Scrapes Unofficial Multiplayer Mods Mega-List
-├── datasets/                        # Source datasets
-│   ├── all_backloggd_titles.txt     # All 2,269 raw unique titles from the 24-page list
-│   └── games_master_2269.json       # Master enriched catalog with platforms & co-op relation
-└── pipeline/                        # Generation scripts
-    └── build_complete_2269_db.py    # Pipeline to rebuild and enrich games database
+├── browser-snippets/          DevTools console scrapers (Co-Optimus)
+├── scrapers/                  Data normalizers & TitleDB fetchers
+│   ├── cooptimus.py           Parses captured Co-Optimus HTML/JSON records
+│   ├── switch_titledb.py      Nintendo Switch TitleDB & icon/banner matcher
+│   └── ctr_titledb.py         3DS/DS TitleDB & GameTDB box art matcher
+├── pipeline/                  Unified Python pipeline & schema
+│   ├── schema/game.schema.json Strict JSON schema for DuoPlay games
+│   ├── common.py              Title normalizer, slug generator, similarity matching
+│   ├── build_db.py            Merges raw data, curated YAMLs, and overrides
+│   ├── enrich_with_gemini.py  Gemini-powered editorial summaries & guides
+│   ├── validate.py            Strict data quality gate & coverage reporter
+│   ├── run_all.sh             End-to-end data build runner
+│   └── tests/                 Pytest test suite for pipeline invariants
+├── data/
+│   ├── raw/                   Raw captures (cooptimus_switch.json, cooptimus_3ds.json)
+│   ├── curated/               Curated YAMLs (download_play_3ds.yaml, overrides.yaml)
+│   ├── seed/                  Verified legacy seed entries
+│   ├── build/                 Intermediate builds & data/build/report.md
+│   └── games.json             Final verified production database (2,136+ games)
+└── site/                      Static Astro website
+    ├── src/content/guides/    Markdown co-op setup guides
+    ├── src/pages/             Static routes (catalog, per-game pages, matchmaker, favorites, guides)
+    └── src/scripts/           Pure TS filtering & matchmaker logic (tested with Vitest)
 ```
 
-## Quick Commands for Claude Code
+---
 
-### 1. Launch Web Application Locally
+## Data Sources & Licensing
+
+- **Co-Optimus**: Multiplayer feature flags, couch/online player limits, drop-in/out, and campaign indicators.
+- **TitleDB & GhostLand NX (NLib)**: Nintendo Switch Title IDs, publisher names, release dates, and icon assets.
+- **GameTDB & CTR TitleDB**: Nintendo 3DS & DS product codes, release dates, and high-resolution cover scans.
+- **Backloggd**: Used strictly as a curator ranking signal (`curatorPick`), never creating standalone unverified records.
+
+*Disclaimer: Nintendo Switch, Nintendo 3DS, Nintendo DS, and Joy-Con are registered trademarks of Nintendo Co., Ltd. DuoPlay is an independent fan resource and is not affiliated with or endorsed by Nintendo.*
+
+---
+
+## Data Pipeline Workflow
+
+### 1. Capturing Co-Optimus Data (Manual DevTools Step)
+Co-Optimus blocks automated bot scrapers via Cloudflare (HTTP 403). Captures are performed safely via DevTools:
+1. Open Chrome / Firefox DevTools Console on:
+   - Switch: `https://www.co-optimus.com/games.php?system=28`
+   - 3DS: `https://www.co-optimus.com/games.php?system=20`
+   - DS: `https://www.co-optimus.com/games.php?system=17`
+2. Paste the script from `browser-snippets/cooptimus_snippet.js` and press Enter.
+3. Move the downloaded JSON files into `data/raw/` (`cooptimus_switch.json`, `cooptimus_3ds.json`).
+
+### 2. Running the Build Pipeline
 ```bash
-cd duoplay-app
-python3 -m http.server 3000
-# Open http://localhost:3000 in your browser
+# Setup Python virtualenv
+python3 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+
+# Run pytest on the pipeline
+.venv/bin/pytest pipeline/tests -q
+
+# Run end-to-end data build and validation
+bash pipeline/run_all.sh
 ```
 
-### 2. Deploy Web App to Vercel
+---
+
+## Website Development & Build
+
 ```bash
-cd duoplay-app
-npx vercel
-# Follow prompt defaults; zero config needed.
+cd site
+
+# Install dependencies
+npm install
+
+# Run unit tests (filters, matchmaker)
+npx vitest run
+
+# Run local development server
+npm run dev
+# -> http://localhost:4321
+
+# Typecheck and build static production distribution
+npx astro check
+npm run build
 ```
 
-### 3. Run Python Scrapers
-```bash
-cd scrapers
-pip install -r requirements.txt
+---
 
-# Scrape Co-Optimus Switch couch co-op:
-python coop_scrapers.py --target cooptimus --system switch --couch-only
+## Deployment to Vercel
 
-# Scrape Unofficial Multiplayer Mods Megalist:
-python coop_scrapers.py --target megalist
-
-# Scrape Nucleus Co-Op split-screen handlers:
-python coop_scrapers.py --target nucleus
-
-# Scrape GhostLand NX content:
-python nx_content_scraper.py --page 1 --max-pages 10
-```
-
-### 4. Rebuild Database After Scraping
-```bash
-python pipeline/build_complete_2269_db.py
-```
+The site is configured for zero-configuration static deployment to Vercel:
+- **Project Root**: `site`
+- **Framework Preset**: `Astro`
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Environment Variable**: `SITE_URL` (default: `https://duoplay.vercel.app`)

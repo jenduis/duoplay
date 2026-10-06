@@ -1,0 +1,47 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const allGuides = await getCollection('guides');
+allGuides.sort((a, b) => (a.data.order ?? 0) - (b.data.order ?? 0));
+---
+
+<BaseLayout
+  title="Nintendo Switch & 3DS Co-Op Guides — DuoPlay"
+  description="Comprehensive guides on Joy-Con sharing, 3DS Download Play, Switch Local Wireless, and choosing co-op games for beginners."
+>
+  <main class="container" style="padding-top: 40px; padding-bottom: 80px; max-width: 900px;">
+    <header style="margin-bottom: 40px; text-align: center;">
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px;">Co-Op & Hardware Guides</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 650px; margin: 0 auto;">
+        Clear, practical walkthroughs for setting up Joy-Con sharing, local wireless, single-cartridge 3DS Download Play, and introducing non-gamers to co-op.
+      </p>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+      {allGuides.map((guide) => (
+        <a
+          href={`/guides/${guide.id}/`}
+          class="card-panel"
+          style="display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform 0.15s ease, border-color 0.15s ease; border-radius: var(--radius-lg);"
+        >
+          <div style="font-size: 2.5rem; margin-bottom: 16px;">{guide.data.icon}</div>
+          <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 8px; color: var(--text);">{guide.data.title}</h2>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; flex-grow: 1;">
+            {guide.data.description}
+          </p>
+          <span style="font-size: 0.85rem; font-weight: 600; color: var(--cyan); margin-top: 16px; display: inline-flex; align-items: center; gap: 4px;">
+            Read Guide &rarr;
+          </span>
+        </a>
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .card-panel:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-hover);
+  }
+</style>
