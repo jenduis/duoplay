@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DuoPlay — The Complete Multi-Console Co-Op & Multiplayer Compendium</title>
+  <meta name="description" content="Explore all 2,269 local, online, and modded multiplayer games across PC, Nintendo Switch, PlayStation, Xbox, 3DS, retro consoles, and community source ports.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo">
+          <span class="controller-gem cyan"></span>
+          <span class="controller-gem purple"></span>
+        </div>
+        <div class="brand-text">
+          <h1>DuoPlay</h1>
+          <span class="badge-subtitle">Universal Co-Op & Multiplayer Database</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button id="openMatchmakerBtn" class="btn btn-primary pulse">
+          <span class="icon">✨</span> Co-Op Matchmaker
+        </button>
+        <button id="openShortlistBtn" class="btn btn-secondary">
+          <span class="icon">⭐</span> Saved Favorites (<span id="shortlistCount">0</span>)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-tag">🕹️ All 2,269 Curated Multiplayer Games Across All Consoles</div>
+      <h2>Find the Perfect Co-Op Adventure for You and Your Player 2</h2>
+      <p class="hero-desc">
+        The complete, cross-platform compendium for two-player date nights, couch co-op duos, and multiplayer squads. Explore PC, Nintendo Switch, PlayStation, Xbox, Nintendo 3DS, retro systems, and community multiplayer mods.
+      </p>
+
+      <!-- Quick Metrics Bar -->
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-card">
+          <span class="stat-num" id="totalGamesStat">2,269</span>
+          <span class="stat-label">Total Titles</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">PC / Steam</span>
+          <span class="stat-label">Windows / Mac / Linux</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Nintendo</span>
+          <span class="stat-label">Switch, 3DS, DS & Retro</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">PlayStation</span>
+          <span class="stat-label">PS5, PS4, PS3 & Classic</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Xbox</span>
+          <span class="stat-label">Series X/S, One & 360</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-num">Modding</span>
+          <span class="stat-label">Megalist Source Ports</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inclusive Co-Op Matchmaker Section -->
+  <section class="matchmaker-section" id="matchmakerSection" style="display: none;">
+    <div class="matchmaker-card">
+      <div class="matchmaker-header">
+        <div class="title-with-icon">
+          <span class="wizard-icon">🤝</span>
+          <div>
+            <h3>Two-Player Co-Op Matchmaker</h3>
+            <p>Select your gaming hardware, your partner's experience level, and the desired vibe to find ideal co-op matches.</p>
+          </div>
+        </div>
+        <button id="closeMatchmakerBtn" class="close-btn" aria-label="Close Matchmaker">&times;</button>
+      </div>
+
+      <div class="wizard-grid">
+        <!-- Question 1: System / Hardware -->
+        <div class="wizard-step">
+          <label class="step-label">1. Primary Console / Setup?</label>
+          <div class="option-pill-group" id="matchHardwareGroup">
+            <button class="pill active" data-val="any">Any Console</button>
+            <button class="pill" data-val="switch">Nintendo Switch</button>
+            <button class="pill" data-val="pc">PC (Steam/LAN)</button>
+            <button class="pill" data-val="playstation">PlayStation (PS4/PS5)</button>
+            <button class="pill" data-val="xbox">Xbox Series/One</button>
+            <button class="pill" data-val="3ds">Nintendo 3DS / DS</button>
+          </div>
+        </div>
+
+        <!-- Question 2: Partner's Comfort Level (Egalitarian & Welcoming) -->
+        <div class="wizard-step">
+          <label class="step-label">2. Player 2 / Partner Experience Level?</label>
+          <div class="option-pill-group" id="matchComfortGroup">
+            <button class="pill active" data-val="beginner">Beginner (Simple controls, low pressure)</button>
+            <button class="pill" data-val="casual">Cozy & Casual (Enjoys puzzles & sims)</button>
+            <button class="pill" data-val="gamer">Experienced Gamer (Comfortable with 3D cameras & combat)</button>
+          </div>
+        </div>
+
+        <!-- Question 3: Desired Date Vibe -->
+        <div class="wizard-step">
+          <label class="step-label">3. Desired Session Vibe?</label>
+          <div class="option-pill-group" id="matchVibeGroup">
+            <button class="pill active" data-val="cozy">Cozy & Relaxing (Wholesome, low stress)</button>
+            <button class="pill" data-val="story">Story & Adventure (Immersive narrative)</button>
+            <button class="pill" data-val="chaos">Laugh-Out-Loud Chaos (Funny party madness)</button>
+            <button class="pill" data-val="puzzle">Brain-Teasers (Logic & escape rooms)</button>
+            <button class="pill" data-val="action">Action & Combat (Fast-paced teamwork)</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="matchmaker-action">
+        <button id="generateMatchesBtn" class="btn btn-success">
+          <span class="icon">✨</span> Discover Recommended Co-Op Matches
+        </button>
+      </div>
+
+      <div class="match-results-container" id="matchResultsContainer" style="display: none;">
+        <h4>Top Tailored Matches:</h4>
+        <div class="match-cards-grid" id="matchCardsGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Search & Filter Hub -->
+  <main class="main-content">
+    <div class="filter-controls-container">
+      
+      <!-- Search Bar Row -->
+      <div class="search-bar-row">
+        <div class="search-input-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search by game title, console (e.g. 'PS5', 'Switch', 'PC', '3DS'), genre, or keywords (e.g. 'split-screen', 'cooking', 'Download Play')...">
+          <button id="clearSearchBtn" class="clear-btn" style="display: none;">&times;</button>
+        </div>
+
+        <div class="sort-wrapper">
+          <label for="sortSelect">Sort By:</label>
+          <select id="sortSelect">
+            <option value="couple-first">Top Partner Picks First</option>
+            <option value="rating-desc">Highest Rated</option>
+            <option value="title-asc">Title (A - Z)</option>
+            <option value="players-desc">Max Players</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Console / Platform Filter Tabs -->
+      <div class="console-filter-wrapper">
+        <span class="filter-label">Filter by Console / Platform:</span>
+        <div class="platform-tabs" id="platformTabs">
+          <button class="tab-btn active" data-platform="all">All Consoles (<span id="count-all">2,269</span>)</button>
+          <button class="tab-btn" data-platform="Switch">Nintendo Switch (<span id="count-switch">0</span>)</button>
+          <button class="tab-btn" data-platform="PC">PC (Steam/Epic) (<span id="count-pc">0</span>)</button>
+          <button class="tab-btn" data-platform="PlayStation">PlayStation (<span id="count-ps">0</span>)</button>
+          <button class="tab-btn" data-platform="Xbox">Xbox (<span id="count-xbox">0</span>)</button>
+          <button class="tab-btn" data-platform="3DS">Nintendo 3DS / DS (<span id="count-3ds">0</span>)</button>
+          <button class="tab-btn" data-platform="Retro">Retro Nintendo (<span id="count-retro">0</span>)</button>
+          <button class="tab-btn" data-platform="Mods">Unofficial Mods & Ports (<span id="count-mods">0</span>)</button>
+        </div>
+      </div>
+
+      <!-- Category Filter Pills -->
+      <div class="filter-row">
+        <span class="filter-label">Category:</span>
+        <div class="filter-pills" id="categoryPills">
+          <button class="cat-pill active" data-category="all">All Titles</button>
+          <button class="cat-pill heart" data-category="couples">⭐ Top Duo / Partner Picks</button>
+          <button class="cat-pill native" data-category="Official Native">🟢 Official Releases</button>
+          <button class="cat-pill mod" data-category="Unofficial Mod / Source Port">🟠 Unofficial Mods & Ports</button>
+          <button class="cat-pill emu" data-category="Emulation / Retro">🟣 Retro & Emulation</button>
+        </div>
+      </div>
+
+      <!-- Secondary Filters Bar -->
+      <div class="secondary-filters-grid">
+        <div class="filter-select-group">
+          <label for="filterMode">Multiplayer Mode:</label>
+          <select id="filterMode">
+            <option value="all">All Modes</option>
+            <option value="Co-op">Co-Op Focus</option>
+            <option value="Versus">Competitive / PvP</option>
+            <option value="Co-op & Versus">Both Co-Op & Versus</option>
+          </select>
+        </div>
+
+        <div class="filter-select-group">
+          <label for="filterConnection">Setup / Connection:</label>
+          <select id="filterConnection">
+            <option value="all">All Setups</option>
+            <option value="same-screen">Same-Screen Couch</option>
+            <option value="split-screen">Split-Screen</option>
+            <option value="online">Online / LAN</option>
+            <option value="local-wireless">Local Wireless</option>
+            <option value="download-play">3DS Download Play (1 Cart)</option>
+            <option value="mod">Community Mod / Source Port</option>
+          </select>
+        </div>
+
+        <div class="filter-select-group">
+          <label for="filterDifficulty">Difficulty / Challenge:</label>
+          <select id="filterDifficulty">
+            <option value="all">All Challenge Levels</option>
+            <option value="Very Chill">Very Chill / Relaxing</option>
+            <option value="Low">Low Stress (Forgiving)</option>
+            <option value="Medium">Medium Challenge</option>
+            <option value="High Chaos">High Energy / Party Chaos</option>
+            <option value="Hardcore">Hardcore / Intense</option>
+          </select>
+        </div>
+
+        <div class="filter-select-group">
+          <label for="filterVibe">Play Vibe:</label>
+          <select id="filterVibe">
+            <option value="all">All Vibes</option>
+            <option value="Cozy & Relaxing">Cozy & Relaxing</option>
+            <option value="Story & Adventure">Story & Adventure</option>
+            <option value="Laugh-Out-Loud Chaos">Laugh-Out-Loud Chaos</option>
+            <option value="Brain-Teasers & Strategy">Brain-Teasers & Strategy</option>
+            <option value="Action & Combat">Action & Combat</option>
+            <option value="Romantic & Emotional">Romantic & Emotional</option>
+            <option value="Casual Date Night">Casual Date Night</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Active Status & Reset -->
+      <div class="active-status-bar">
+        <div class="results-count">
+          Showing <span id="filteredCount">0</span> of <span id="totalCatalogCount">2,269</span> games
+        </div>
+        <button id="resetFiltersBtn" class="btn btn-link" style="display: none;">
+          ✕ Clear All Filters
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Games Display Grid -->
+    <div class="games-grid" id="gamesGrid">
+      <!-- Injected dynamically via app.js -->
+    </div>
+
+    <!-- Pagination / Load More Bar -->
+    <div class="pagination-bar" id="paginationBar">
+      <button id="prevPageBtn" class="btn btn-secondary">◀ Previous Page</button>
+      <span class="page-indicator" id="pageIndicator">Page 1 of 1</span>
+      <button id="nextPageBtn" class="btn btn-primary">Next Page ▶</button>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="emptyState" style="display: none;">
+      <div class="empty-icon">🎮</div>
+      <h3>No games matched your criteria</h3>
+      <p>Try clearing some keywords or switching the console filter tab.</p>
+      <button class="btn btn-secondary" onclick="resetAllFilters()">Reset All Filters</button>
+    </div>
+  </main>
+
+  <!-- Game Details Modal -->
+  <div class="modal-backdrop" id="gameModalBackdrop" style="display: none;">
+    <div class="modal-card" id="gameModalCard">
+      <button class="modal-close-btn" id="closeModalBtn" aria-label="Close details">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-cover-wrapper">
+          <img id="modalCoverImg" class="modal-cover-img" alt="Cover Art" src="" style="display: none;">
+          <div id="modalCoverFallback" class="modal-cover-fallback">
+            <span class="fallback-icon">🎮</span>
+          </div>
+        </div>
+
+        <div class="modal-title-area">
+          <div class="modal-badge-row">
+            <span class="badge platform-badge" id="modalPlatform">Platform</span>
+            <span class="badge category-badge" id="modalCategory">Official Release</span>
+            <span class="badge couple-badge" id="modalCoupleBadge">⭐ Top Partner Pick</span>
+          </div>
+          <h2 id="modalTitle">Game Title</h2>
+          <div class="modal-meta-row">
+            <span id="modalGenre">Genre</span> • 
+            <span id="modalPlayers">2 Players</span> • 
+            <span id="modalRating">⭐⭐⭐⭐⭐</span>
+          </div>
+          <div class="modal-external-links">
+            <a id="modalSteamGridDbLink" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+              🖼️ SteamGridDB Covers
+            </a>
+            <a id="modalIgdbLink" href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline">
+              🎮 View on IGDB
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-section highlight-box">
+          <h4>🔗 How It Relates to Multiplayer / Co-Op</h4>
+          <p id="modalHowItRelates">Multiplayer relationship details.</p>
+        </div>
+
+        <div class="modal-section">
+          <h4>🕹️ Supported Consoles & Platforms</h4>
+          <div class="platform-tag-list" id="modalPlatformsList"></div>
+        </div>
+
+        <div class="modal-section">
+          <h4>📖 Overview</h4>
+          <p id="modalSummary">Summary description.</p>
+        </div>
+
+        <div class="modal-section">
+          <h4>🛠️ Setup & How to Connect</h4>
+          <p id="modalSetupGuide">Setup instructions.</p>
+        </div>
+
+        <div class="modal-grid-tags">
+          <div class="tag-box">
+            <span class="tag-label">Play Style</span>
+            <span class="tag-value" id="modalConnection">Same-Screen Couch</span>
+          </div>
+          <div class="tag-box">
+            <span class="tag-label">Multiplayer Mode</span>
+            <span class="tag-value" id="modalMode">Co-op</span>
+          </div>
+          <div class="tag-box">
+            <span class="tag-label">Challenge Level</span>
+            <span class="tag-value" id="modalDifficulty">Very Chill</span>
+          </div>
+          <div class="tag-box">
+            <span class="tag-label">Date / Session Vibe</span>
+            <span class="tag-value" id="modalVibe">Cozy & Relaxing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="modalBookmarkBtn" class="btn btn-secondary">
+          <span class="icon">⭐</span> Save to Favorites
+        </button>
+        <button id="modalCloseActionBtn" class="btn btn-primary">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saved Favorites Drawer -->
+  <div class="drawer-backdrop" id="shortlistBackdrop" style="display: none;">
+    <div class="drawer-panel" id="shortlistPanel">
+      <div class="drawer-header">
+        <h3>⭐ Your Saved Co-Op List (<span id="drawerCount">0</span>)</h3>
+        <button class="close-btn" id="closeShortlistBtn">&times;</button>
+      </div>
+      <div class="drawer-body" id="shortlistItems">
+        <p class="empty-drawer-text">You haven't bookmarked any games yet. Click the star/heart on any game card to add it to your shortlist!</p>
+      </div>
+      <div class="drawer-footer">
+        <button id="copyShortlistBtn" class="btn btn-primary" style="width: 100%;">
+          📋 Copy List to Clipboard
+        </button>
+        <button id="clearShortlistBtn" class="btn btn-link" style="width: 100%; margin-top: 8px;">
+          Clear List
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Educational Guide / Accordion -->
+  <section class="guides-section">
+    <div class="guides-container">
+      <h3>💡 Console Multiplayer Reference & Setup Guide</h3>
+      
+      <details class="guide-accordion">
+        <summary><strong>Nintendo Switch: 1-Console Joy-Con Sharing vs. Local Wireless</strong></summary>
+        <div class="accordion-content">
+          <p>
+            The Switch offers both single-console couch play and multi-console local wireless:
+          </p>
+          <ul>
+            <li><strong>Single Console (Shared / Split Screen):</strong> Games like <em>It Takes Two</em>, <em>Snipperclips</em>, <em>Overcooked</em>, <em>Blanc</em>, and <em>Stardew Valley</em> can be played on 1 Switch simply by detaching Joy-Cons or connecting extra controllers.</li>
+            <li><strong>Local Wireless (Multiple Switches):</strong> Games like <em>Splatoon 3</em>, <em>Monster Hunter Rise</em>, and <em>Pokemon</em> communicate directly via ad-hoc local Wi-Fi without needing an internet connection.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="guide-accordion">
+        <summary><strong>Nintendo 3DS / DS: 1-Cartridge Download Play vs. Multi-Card Wireless</strong></summary>
+        <div class="accordion-content">
+          <p>
+            <strong>Download Play</strong> allows two or more 3DS/DS systems to play together wirelessly using <strong>only a single game cartridge</strong>:
+          </p>
+          <ul>
+            <li><strong>Host:</strong> Inserts the cartridge and hosts a "Download Play" session.</li>
+            <li><strong>Guest:</strong> Opens the orange "Download Play" icon on the 3DS Home Menu to connect.</li>
+            <li><strong>Top Single-Cart Games:</strong> <em>Mario Kart 7</em> (8 players), <em>Luigi's Mansion</em> (Gooigi co-op), <em>Zelda: Tri Force Heroes</em> (3-player campaign), and <em>Rhythm Heaven Megamix</em>.</li>
+          </ul>
+        </div>
+      </details>
+
+      <details class="guide-accordion">
+        <summary><strong>PC, PlayStation & Xbox: Seamless Couch & LAN Co-Op</strong></summary>
+        <div class="accordion-content">
+          <p>
+            Many modern titles support full multi-controller play on PC (using Steam Input with any controller) or split-screen couch co-op on PS4/PS5 and Xbox Series X/S. Furthermore, community tools like <strong>Nucleus Co-Op</strong> allow split-screen play on PC for hundreds of traditionally online-only games.
+          </p>
+        </div>
+      </details>
+
+      <details class="guide-accordion">
+        <summary><strong>Unofficial Multiplayer Mods & Source Ports (Megalist Reference)</strong></summary>
+        <div class="accordion-content">
+          <p>
+            Community decompilations and multiplayer mods (from the <a href="https://megalist.neocities.org/mpm" target="_blank" rel="noopener">Unofficial Multiplayer Mods Megalist</a>) allow classic single-player games to be enjoyed in co-op:
+          </p>
+          <ul>
+            <li><strong>Super Mario 64 Coop DX (sm64ex-coop):</strong> Full campaign 2-player co-op running at 60 FPS natively on PC and hacked Switch consoles with synced stars and custom characters.</li>
+            <li><strong>The Legend of Zelda (Ship of Harkinian):</strong> Native source ports with widescreen 60 FPS and multiplayer crowd-control.</li>
+            <li><strong>Sonic 3 A.I.R.:</strong> 16-bit widescreen remaster running on Switch and PC with Sonic & Tails co-op.</li>
+            <li><strong>Undertale Together & Skyrim Together:</strong> Full community cooperative campaign mods on PC.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p>DuoPlay — Comprehensive Multi-Console Co-Op & Multiplayer Database. Compiled across Backloggd, Co-Optimus, and community multiplayer mod archives.</p>
+      <p class="copyright">Zero-configuration static build ready for Vercel deployment.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

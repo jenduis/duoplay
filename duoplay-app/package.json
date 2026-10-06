@@ -1,0 +1,23 @@
+{
+  "name": "duoplay-nintendo-coop-explorer",
+  "version": "1.0.0",
+  "description": "Comprehensive Nintendo Switch & 3DS Local and Wireless Multiplayer & Co-Op Explorer for Date Nights",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python3 -m http.server 3000",
+    "start": "python3 -m http.server 3000"
+  },
+  "keywords": [
+    "nintendo",
+    "switch",
+    "3ds",
+    "coop",
+    "multiplayer",
+    "couch-coop",
+    "download-play",
+    "date-night",
+    "vercel"
+  ],
+  "author": "",
+  "license": "MIT"
+}
