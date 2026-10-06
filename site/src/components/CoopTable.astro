@@ -1,0 +1,101 @@
+---
+interface Props {
+  coop: {
+    campaign: boolean;
+    local: { max: number | null; sameScreen: boolean; splitScreen: boolean };
+    localWireless: { max: number | null };
+    online: { max: number | null };
+    downloadPlay: boolean;
+    gameShare: boolean;
+    dropInOut: boolean | null;
+  };
+  versus: boolean;
+  maxPlayers: number | null;
+}
+
+const { coop, versus, maxPlayers } = Astro.props;
+---
+
+<div class="coop-table-wrapper">
+  <table class="coop-table">
+    <thead>
+      <tr>
+        <th>Multiplayer Mode</th>
+        <th>Support</th>
+        <th>Max Players</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Same-Screen Couch</strong></td>
+        <td>{coop.local.sameScreen ? '🟢 Yes' : '✕ No'}</td>
+        <td>{coop.local.sameScreen && coop.local.max ? `${coop.local.max} Players` : '—'}</td>
+      </tr>
+      <tr>
+        <td><strong>Split-Screen Couch</strong></td>
+        <td>{coop.local.splitScreen ? '🟢 Yes' : '✕ No'}</td>
+        <td>{coop.local.splitScreen && coop.local.max ? `${coop.local.max} Players` : '—'}</td>
+      </tr>
+      <tr>
+        <td><strong>Local Wireless (Ad-hoc)</strong></td>
+        <td>{coop.localWireless.max && coop.localWireless.max > 1 ? '🟢 Yes' : '✕ No'}</td>
+        <td>{coop.localWireless.max && coop.localWireless.max > 1 ? `${coop.localWireless.max} Players` : '—'}</td>
+      </tr>
+      <tr>
+        <td><strong>Online Co-Op</strong></td>
+        <td>{coop.online.max && coop.online.max > 1 ? '🟢 Yes' : '✕ No'}</td>
+        <td>{coop.online.max && coop.online.max > 1 ? `${coop.online.max} Players` : '—'}</td>
+      </tr>
+      <tr>
+        <td><strong>Single-Cart Download Play</strong></td>
+        <td>{coop.downloadPlay ? '⚡ Yes (1-Cart)' : '✕ No'}</td>
+        <td>{coop.downloadPlay ? `${maxPlayers || 2} Players` : '—'}</td>
+      </tr>
+      <tr>
+        <td><strong>Co-Op Campaign</strong></td>
+        <td>{coop.campaign ? '🟢 Yes' : '✕ No'}</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Drop-in / Drop-out</strong></td>
+        <td>{coop.dropInOut === true ? '🟢 Yes' : (coop.dropInOut === false ? '✕ No' : 'Unknown')}</td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><strong>Versus / PvP Mode</strong></td>
+        <td>{versus ? '🟢 Yes' : '✕ No'}</td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .coop-table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+  }
+  .coop-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    text-align: left;
+  }
+  .coop-table th, .coop-table td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  .coop-table th {
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-weight: 700;
+  }
+  .coop-table tr:last-child td {
+    border-bottom: none;
+  }
+  .coop-table tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+  }
+</style>

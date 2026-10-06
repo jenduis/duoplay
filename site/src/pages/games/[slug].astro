@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CoopTable from '../../components/CoopTable.astro';
+import GameCard from '../../components/GameCard.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const allGames = await getCollection('games');
+  return allGames.map(game => ({
+    params: { slug: game.data.id },
+    props: { game: game.data },
+  }));
+}
+
+const { game } = Astro.props;
+
+// Find similar co-op games on the same platform
+const allGames = await getCollection('games');
+const similar = allGames
+  .filter(g => g.data.id !== game.id && g.data.platforms.some(p => game.platforms.includes(p)))
+  .filter(g => g.data.editorial.vibe === game.editorial.vibe || g.data.genres.some(genre => game.genres.includes(genre)))
+  .slice(0, 3)
+  .map(g => g.data);
+
+const title = `${game.title} Co-Op & Multiplayer Guide — DuoPlay`;
+const description = `${game.title} co-op details: ${game.editorial.coopSummary}`;
+---
+
+<BaseLayout title={title} description={description} ogImage={game.cover?.url || '/og-default.png'}>
+  <main class="container game-detail-page">
+    <div class="breadcrumb">
+      <a href="/">Catalog</a> <span>›</span>
+      <a href={`/${game.platforms[0]}/`}>{game.platforms[0].toUpperCase()}</a> <span>›</span>
+      <strong>{game.title}</strong>
+    </div>
+
+    <div class="game-header-grid">
+      <div class="cover-column">
+        {game.cover ? (
+          <img src={game.cover.url} alt={`${game.title} artwork`} class="detail-cover" />
+        ) : (
+          <div class="detail-cover-placeholder">🎮</div>
+        )}
+      </div>
+
+      <div class="header-content">
+        <div class="badge-row">
+          {game.platforms.map(p => (
+            <span class={`badge ${p}`}>{p.toUpperCase()}</span>
+          ))}
+          {game.curatorPick && <span class="badge curator">★ Top Duo Pick</span>}
+          {game.coop.downloadPlay && <span class="badge ds">⚡ 1-Cart Download Play</span>}
+        </div>
+
+        <h1 class="game-title">{game.title}</h1>
+
+        <div class="metadata-meta">
+          <span>👥 {game.maxPlayers ? `Up to ${game.maxPlayers} Players` : 'Multiplayer'}</span> •
+          <span>🎭 {game.genres.join(', ')}</span> •
+          <span>⚡ {game.editorial.difficulty}</span>
+        </div>
+
+        <p class="summary-lead">{game.editorial.summary}</p>
+
+        <div class="action-row">
+          <button id="detailFavBtn" class="btn btn-secondary">
+            ⭐ Save to Favorites
+          </button>
+          {game.ids.cooptimusUrl && (
+            <a href={game.ids.cooptimusUrl} target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="font-size: 0.85rem;">
+              Co-Optimus Page ↗
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+
+    <!-- How Co-Op Works Box -->
+    <section class="section-box highlight">
+      <h2>🎮 How Co-Op Works in {game.title}</h2>
+      <p>{game.editorial.coopSummary}</p>
+    </section>
+
+    <!-- Setup Guide -->
+    <section class="section-box">
+      <h2>🛠️ How to Connect & Setup</h2>
+      <p>{game.editorial.setupGuide}</p>
+    </section>
+
+    <!-- Co-Op Breakdown Table -->
+    <section class="section-box">
+      <h2>📊 Multiplayer Specifications</h2>
+      <CoopTable coop={game.coop} versus={game.versus} maxPlayers={game.maxPlayers} />
+    </section>
+
+    <!-- Similar Recommendations -->
+    {similar.length > 0 && (
+      <section class="section-box">
+        <h2>✨ Similar Co-Op Games You Might Like</h2>
+        <div class="similar-grid">
+          {similar.map(sim => (
+            <GameCard game={sim} />
+          ))}
+        </div>
+      </section>
+    )}
+  </main>
+</BaseLayout>
+
+<script define:vars={{ gameId: game.id }}>
+  const btn = document.getElementById('detailFavBtn');
+
+  function checkSaved() {
+    try {
+      const favs = JSON.parse(localStorage.getItem('duoplay_favs_v2') || '[]');
+      const isSaved = favs.includes(gameId);
+      if (btn) btn.textContent = isSaved ? '⭐ Saved in Favorites' : '☆ Save to Favorites';
+    } catch {}
+  }
+
+  btn?.addEventListener('click', () => {
+    try {
+      let favs = JSON.parse(localStorage.getItem('duoplay_favs_v2') || '[]');
+      if (favs.includes(gameId)) {
+        favs = favs.filter(id => id !== gameId);
+      } else {
+        favs.push(gameId);
+      }
+      localStorage.setItem('duoplay_favs_v2', JSON.stringify(favs));
+      checkSaved();
+      window.dispatchEvent(new Event('storage'));
+    } catch {}
+  });
+
+  checkSaved();
+</script>
+
+<style>
+  .game-detail-page {
+    padding-top: 30px;
+  }
+  .breadcrumb {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .breadcrumb a:hover {
+    color: var(--switch-blue);
+  }
+  .game-header-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 32px;
+    margin-bottom: 36px;
+  }
+  @media (max-width: 640px) {
+    .game-header-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  .detail-cover {
+    width: 200px;
+    height: 200px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+  }
+  .detail-cover-placeholder {
+    width: 200px;
+    height: 200px;
+    border-radius: var(--radius-md);
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+  }
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .game-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .metadata-meta {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .summary-lead {
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--text-main);
+    margin-bottom: 20px;
+  }
+  .action-row {
+    display: flex;
+    gap: 12px;
+  }
+  .section-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  .section-box.highlight {
+    border-color: rgba(0, 210, 255, 0.35);
+    background: rgba(0, 210, 255, 0.03);
+  }
+  .section-box h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .section-box p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+  .similar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+  }
+</style>
