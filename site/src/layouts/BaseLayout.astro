@@ -1,0 +1,73 @@
+---
+import Seo from '../components/Seo.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const { title, description, ogImage } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <Seo title={title} description={description} ogImage={ogImage} />
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="container header-inner">
+        <a href="/" class="brand">
+          <div class="brand-gem-container">
+            <span class="gem red"></span>
+            <span class="gem blue"></span>
+          </div>
+          <div>
+            <span class="brand-title">DuoPlay</span>
+            <span class="brand-subtitle">Switch & 3DS Co-Op Finder</span>
+          </div>
+        </a>
+
+        <nav class="nav-links">
+          <a href="/switch/">Switch</a>
+          <a href="/3ds/">3DS</a>
+          <a href="/download-play/">Download Play</a>
+          <a href="/matchmaker/">Matchmaker</a>
+          <a href="/guides/">Guides</a>
+          <a href="/favorites/" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem;">
+            ⭐ Saved (<span id="navFavCount">0</span>)
+          </a>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="app-footer">
+      <div class="container">
+        <p><strong>DuoPlay</strong> — Independent Nintendo Switch & 3DS Multiplayer and Co-Op Explorer.</p>
+        <p>Data compiled with gratitude from Co-Optimus, titledb, GameTDB, and community archives.</p>
+        <p style="font-size: 0.75rem; color: var(--text-subtle); margin-top: 12px;">
+          Nintendo Switch, Nintendo 3DS, and Joy-Con are registered trademarks of Nintendo Co., Ltd. DuoPlay is not affiliated with or endorsed by Nintendo.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      function updateFavCount() {
+        try {
+          const favs = JSON.parse(localStorage.getItem('duoplay_favs_v2') || localStorage.getItem('duoplay_favs') || '[]');
+          const el = document.getElementById('navFavCount');
+          if (el) el.textContent = String(favs.length);
+        } catch {}
+      }
+      updateFavCount();
+      window.addEventListener('storage', updateFavCount);
+    </script>
+  </body>
+</html>
