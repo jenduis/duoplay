@@ -177,7 +177,7 @@
   source: https://www.mariowiki.com/Mario_%26_Sonic_at_the_London_2012_Olympic_Games
   verify: true
 
-- title: Mario Golf: World Tour
+- title: "Mario Golf: World Tour"
   platform: 3ds
   downloadPlay: true
   maxPlayers: 4
@@ -195,7 +195,7 @@
   source: https://segaretro.org/3D_Streets_of_Rage_2
   verify: false
 
-- title: Freakyforms Deluxe: Your Creations, Alive!
+- title: "Freakyforms Deluxe: Your Creations, Alive!"
   platform: 3ds
   downloadPlay: true
   maxPlayers: 4

@@ -1,0 +1,586 @@
+{
+  "3D Altered Beast": {
+    "title": "3D Altered Beast",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JA7P",
+    "tid": "00040000000DC200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JA7P.png",
+    "coverSource": "gametdb"
+  },
+  "3D Gunstar Heroes": {
+    "title": "3D Gunstar Heroes",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KGHP",
+    "tid": "000400000015B900",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KGHP.png",
+    "coverSource": "gametdb"
+  },
+  "3D Streets of Rage": {
+    "title": "3D Streets of Rage",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JRAP",
+    "tid": "00040000000DE400",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JRAP.png",
+    "coverSource": "gametdb"
+  },
+  "Animal Crossing: New Leaf": {
+    "title": "Animal Crossing: New Leaf",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-EGDP",
+    "tid": "0004000000086400",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/EGDP.png",
+    "coverSource": "gametdb"
+  },
+  "Attack on Titan: Humanity in Chains": {
+    "title": "Attack on Titan: Humanity in Chains",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-BG2E",
+    "tid": "0004000000131E00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BG2E.png",
+    "coverSource": "gametdb"
+  },
+  "Battleminerz": {
+    "title": "Battleminerz",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KBXP",
+    "tid": "00040000001C9D00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KBXP.png",
+    "coverSource": "gametdb"
+  },
+  "Bomb Monkey": {
+    "title": "Bomb Monkey",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JB3E",
+    "tid": "000400000009B200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JB3E.png",
+    "coverSource": "gametdb"
+  },
+  "BUGS vs. TANKS!": {
+    "title": "BUGS vs. TANKS!",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JS4P",
+    "tid": "00040000000DA200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JS4P.png",
+    "coverSource": "gametdb"
+  },
+  "Cartoon Network: Battle Crashers": {
+    "title": "Cartoon Network: Battle Crashers",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BRWZ",
+    "tid": "00040000001A6500",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BRWZ.png",
+    "coverSource": "gametdb"
+  },
+  "Centipede: Infestation": {
+    "title": "Centipede: Infestation",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ACPE",
+    "tid": "000400000004AD00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ACPE.png",
+    "coverSource": "gametdb"
+  },
+  "Code of Princess": {
+    "title": "Code of Princess",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-AC7P",
+    "tid": "00040000000CB500",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AC7P.png",
+    "coverSource": "gametdb"
+  },
+  "Deer Drive Legends": {
+    "title": "Deer Drive Legends",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-AD2P",
+    "tid": "00040000000DC500",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AD2P.png",
+    "coverSource": "gametdb"
+  },
+  "Donkey Kong Country Returns 3D": {
+    "title": "Donkey Kong Country Returns 3D",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AYTP",
+    "tid": "00040000000CCF00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AYTP.png",
+    "coverSource": "gametdb"
+  },
+  "Fantasy Life": {
+    "title": "Fantasy Life",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AFLP",
+    "tid": "0004000000113100",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AFLP.png",
+    "coverSource": "gametdb"
+  },
+  "Final Fantasy Explorers": {
+    "title": "Final Fantasy Explorers",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BCEP",
+    "tid": "000400000016E700",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BCEP.png",
+    "coverSource": "gametdb"
+  },
+  "Fire Emblem: Awakening": {
+    "title": "Fire Emblem: Awakening",
+    "platform": "ds",
+    "ctrProductCode": "CTR-T-AFEP",
+    "tid": "000400020009F101",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AFEP.png",
+    "coverSource": "gametdb"
+  },
+  "Fossil Fighters: Frontier": {
+    "title": "Fossil Fighters: Frontier",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AHRD",
+    "tid": "0004000000145400",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AHRD.png",
+    "coverSource": "gametdb"
+  },
+  "Gotta Protectors": {
+    "title": "Gotta Protectors",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KRPE",
+    "tid": "0004000000196E00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KRPE.png",
+    "coverSource": "gametdb"
+  },
+  "Heroes of Ruin": {
+    "title": "Heroes of Ruin",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AH6P",
+    "tid": "0004000000074000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AH6P.png",
+    "coverSource": "gametdb"
+  },
+  "Kirby: Planet Robobot": {
+    "title": "Kirby: Planet Robobot",
+    "platform": "ds",
+    "ctrProductCode": "CTR-B-AT3E",
+    "tid": "0004000000189600",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AT3E.png",
+    "coverSource": "gametdb"
+  },
+  "Kokuga": {
+    "title": "Kokuga",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-AK8P",
+    "tid": "00040000000E5F00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AK8P.png",
+    "coverSource": "gametdb"
+  },
+  "LEGO Batman 2: DC Super Heroes": {
+    "title": "LEGO Batman 2: DC Super Heroes",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ALBZ",
+    "tid": "000400000009B000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ALBZ.png",
+    "coverSource": "gametdb"
+  },
+  "LEGO Batman 3: Beyond Gotham": {
+    "title": "LEGO Batman 3: Beyond Gotham",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BTMP",
+    "tid": "000400000011C200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BTMP.png",
+    "coverSource": "gametdb"
+  },
+  "LEGO Harry Potter: Years 5-7": {
+    "title": "LEGO Harry Potter: Years 5-7",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AHPP",
+    "tid": "0004000000049200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AHPP.png",
+    "coverSource": "gametdb"
+  },
+  "LEGO Star Wars: The Force Awakens": {
+    "title": "LEGO Star Wars: The Force Awakens",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BLWP",
+    "tid": "000400000017ED00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BLWP.png",
+    "coverSource": "gametdb"
+  },
+  "LEGO The Lord of the Rings": {
+    "title": "LEGO The Lord of the Rings",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ALAP",
+    "tid": "000400000007AA00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ALAP.png",
+    "coverSource": "gametdb"
+  },
+  "Luigi's Mansion": {
+    "title": "Luigi's Mansion",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BGNP",
+    "tid": "00040000001D1A00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BGNP.png",
+    "coverSource": "gametdb"
+  },
+  "Luigi's Mansion: Dark Moon": {
+    "title": "Luigi's Mansion: Dark Moon",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AGGK",
+    "tid": "00040000000CFF00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AGGK.png",
+    "coverSource": "gametdb"
+  },
+  "Metroid Prime: Federation Force": {
+    "title": "Metroid Prime: Federation Force",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BCAP",
+    "tid": "0004000000175200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BCAP.png",
+    "coverSource": "gametdb"
+  },
+  "Monster Hunter 3 Ultimate": {
+    "title": "Monster Hunter 3 Ultimate",
+    "platform": "ds",
+    "ctrProductCode": "CTR-T-AMHP",
+    "tid": "00040002000B1D01",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AMHP.png",
+    "coverSource": "gametdb"
+  },
+  "Monster Hunter 4 Ultimate": {
+    "title": "Monster Hunter 4 Ultimate",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KFGE",
+    "tid": "000400000015FA00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KFGE.png",
+    "coverSource": "gametdb"
+  },
+  "Monster Hunter Generations": {
+    "title": "Monster Hunter Generations",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BXXP",
+    "tid": "0004000000185B00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BXXP.png",
+    "coverSource": "gametdb"
+  },
+  "New Super Mario Bros. 2": {
+    "title": "New Super Mario Bros. 2",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ABEP",
+    "tid": "000400000007AF00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ABEP.png",
+    "coverSource": "gametdb"
+  },
+  "One Piece: Unlimited World R": {
+    "title": "One Piece: Unlimited World R",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BUWJ",
+    "tid": "00040000000F5800",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BUWJ.png",
+    "coverSource": "gametdb"
+  },
+  "Pokemon Mystery Dungeon: Gates to Infinity": {
+    "title": "Pokemon Mystery Dungeon: Gates to Infinity",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-APDP",
+    "tid": "00040000000BA900",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/APDP.png",
+    "coverSource": "gametdb"
+  },
+  "Resident Evil: Revelations": {
+    "title": "Resident Evil: Revelations",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ABRP",
+    "tid": "000400000005EE00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ABRP.png",
+    "coverSource": "gametdb"
+  },
+  "Resident Evil: The Mercenaries 3D": {
+    "title": "Resident Evil: The Mercenaries 3D",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ABMP",
+    "tid": "0004000000038B00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ABMP.png",
+    "coverSource": "gametdb"
+  },
+  "Rhythm Heaven Megamix": {
+    "title": "Rhythm Heaven Megamix",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BPJE",
+    "tid": "000400000018A400",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BPJE.png",
+    "coverSource": "gametdb"
+  },
+  "River City: Rival Showdown": {
+    "title": "River City: Rival Showdown",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-BDJP",
+    "tid": "00040000001CD000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BDJP.png",
+    "coverSource": "gametdb"
+  },
+  "Senran Kagura 2: Deep Crimson": {
+    "title": "Senran Kagura 2: Deep Crimson",
+    "platform": "ds",
+    "ctrProductCode": "eShop",
+    "tid": "0004000000165800",
+    "coverUrl": null,
+    "coverSource": null
+  },
+  "Skylanders Giants": {
+    "title": "Skylanders Giants",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-AG6P",
+    "tid": "00040000000A3500",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/AG6P.png",
+    "coverSource": "gametdb"
+  },
+  "Skylanders: Spyro's Adventure": {
+    "title": "Skylanders: Spyro's Adventure",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ASPP",
+    "tid": "000400000004C000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ASPP.png",
+    "coverSource": "gametdb"
+  },
+  "Team Kirby Clash Deluxe": {
+    "title": "Team Kirby Clash Deluxe",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JLKP",
+    "tid": "00040000001AB900",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JLKP.png",
+    "coverSource": "gametdb"
+  },
+  "Terraria": {
+    "title": "Terraria",
+    "platform": "ds",
+    "ctrProductCode": "CTR-T-BTEJ",
+    "tid": "0004000200193501",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BTEJ.png",
+    "coverSource": "gametdb"
+  },
+  "Tetris Axis": {
+    "title": "Tetris Axis",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ATLE",
+    "tid": "0004000000043800",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ATLE.png",
+    "coverSource": "gametdb"
+  },
+  "The Legend of Zelda: Tri Force Heroes": {
+    "title": "The Legend of Zelda: Tri Force Heroes",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KALP",
+    "tid": "0004000000182300",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KALP.png",
+    "coverSource": "gametdb"
+  },
+  "The Magic Hammer": {
+    "title": "The Magic Hammer",
+    "platform": "ds",
+    "ctrProductCode": "CTR-T-KHME",
+    "tid": "000400020016F301",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KHME.png",
+    "coverSource": "gametdb"
+  },
+  "Theatrhythm Final Fantasy": {
+    "title": "Theatrhythm Final Fantasy",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ATHP",
+    "tid": "0004000000091600",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ATHP.png",
+    "coverSource": "gametdb"
+  },
+  "Touch Battle Tank - Tag Combat -": {
+    "title": "Touch Battle Tank - Tag Combat -",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-KT3P",
+    "tid": "00040000001AD200",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/KT3P.png",
+    "coverSource": "gametdb"
+  },
+  "Undead Storm Nightmare": {
+    "title": "Undead Storm Nightmare",
+    "platform": "ds",
+    "ctrProductCode": "CTR-T-JZQP",
+    "tid": "0004000200155901",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JZQP.png",
+    "coverSource": "gametdb"
+  },
+  "YO-KAI WATCH 2: Bony Spirits": {
+    "title": "YO-KAI WATCH 2: Bony Spirits",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BYGZ",
+    "tid": "000400000019B000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BYGZ.png",
+    "coverSource": "gametdb"
+  },
+  "YO-KAI WATCH 2: Fleshy Souls": {
+    "title": "YO-KAI WATCH 2: Fleshy Souls",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BYHZ",
+    "tid": "000400000019B100",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BYHZ.png",
+    "coverSource": "gametdb"
+  },
+  "YO-KAI WATCH 2: Psychic Specters": {
+    "title": "YO-KAI WATCH 2: Psychic Specters",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BYSZ",
+    "tid": "00040000001B2800",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BYSZ.png",
+    "coverSource": "gametdb"
+  },
+  "Yo-Kai Watch Blasters: Red Cat Corps": {
+    "title": "Yo-Kai Watch Blasters: Red Cat Corps",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BYAP",
+    "tid": "00040000001CEC00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BYAP.png",
+    "coverSource": "gametdb"
+  },
+  "Yo-Kai Watch Blasters: White Dog Squad": {
+    "title": "Yo-Kai Watch Blasters: White Dog Squad",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-BYBP",
+    "tid": "00040000001CF000",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/BYBP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Kart 7": {
+    "title": "Mario Kart 7",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-N-JMKC",
+    "tid": "000400000008B500",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/JMKC.png",
+    "coverSource": "gametdb"
+  },
+  "Kirby: Triple Deluxe": {
+    "title": "Kirby: Triple Deluxe",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-BALP",
+    "tid": "000400000010C000",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/BALP.png",
+    "coverSource": "gametdb"
+  },
+  "Kirby Fighters Deluxe": {
+    "title": "Kirby Fighters Deluxe",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-N-JVXP",
+    "tid": "0004000000147F00",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/JVXP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Party: Island Tour": {
+    "title": "Mario Party: Island Tour",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-ATSP",
+    "tid": "00040000000F8200",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/ATSP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Party: Star Rush": {
+    "title": "Mario Party: Star Rush",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-BAAP",
+    "tid": "000400000019BE00",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/BAAP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Party: The Top 100": {
+    "title": "Mario Party: The Top 100",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-BHRP",
+    "tid": "00040000001C4D00",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/BHRP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Tennis Open": {
+    "title": "Mario Tennis Open",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-AGAP",
+    "tid": "000400000007C800",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/AGAP.png",
+    "coverSource": "gametdb"
+  },
+  "Star Fox 64 3D": {
+    "title": "Star Fox 64 3D",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-ANRP",
+    "tid": "0004000000049100",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/ANRP.png",
+    "coverSource": "gametdb"
+  },
+  "Super Street Fighter IV: 3D Edition": {
+    "title": "Super Street Fighter IV: 3D Edition",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-B-ASSE",
+    "tid": "0004000000038400",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/ASSE.png",
+    "coverSource": "gametdb"
+  },
+  "Tetris Ultimate": {
+    "title": "Tetris Ultimate",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-BTLP",
+    "tid": "0004000000132400",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/BTLP.png",
+    "coverSource": "gametdb"
+  },
+  "Dr. Mario: Miracle Cure": {
+    "title": "Dr. Mario: Miracle Cure",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-AX8A",
+    "tid": "000400000013BB00",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/AX8A.png",
+    "coverSource": "gametdb"
+  },
+  "Mario & Sonic at the London 2012 Olympic Games": {
+    "title": "Mario & Sonic at the London 2012 Olympic Games",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-ACMP",
+    "tid": "0004000000054900",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/ACMP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Golf: World Tour": {
+    "title": "Mario Golf: World Tour",
+    "platform": "3ds",
+    "ctrProductCode": "Demo",
+    "tid": "0004000200106301",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/DEMO.png",
+    "coverSource": "gametdb"
+  },
+  "3D Streets of Rage 2": {
+    "title": "3D Streets of Rage 2",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-N-KSRP",
+    "tid": "000400000015B800",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/KSRP.png",
+    "coverSource": "gametdb"
+  },
+  "Freakyforms Deluxe: Your Creations, Alive!": {
+    "title": "Freakyforms Deluxe: Your Creations, Alive!",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-ATQP",
+    "tid": "0004000000093300",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/ATQP.png",
+    "coverSource": "gametdb"
+  },
+  "Puzzle & Dragons Z + Puzzle & Dragons Super Mario Bros. Edition": {
+    "title": "Puzzle & Dragons Z + Puzzle & Dragons Super Mario Bros. Edition",
+    "platform": "3ds",
+    "ctrProductCode": "CTR-P-AZGP",
+    "tid": "0004000000137800",
+    "coverUrl": "https://art.gametdb.com/3ds/box/US/AZGP.png",
+    "coverSource": "gametdb"
+  },
+  "Mario Kart DS": {
+    "title": "Mario Kart DS",
+    "platform": "ds",
+    "ctrProductCode": "CTR-N-JMKC",
+    "tid": "000400000008B500",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/JMKC.png",
+    "coverSource": "gametdb"
+  },
+  "New Super Mario Bros.": {
+    "title": "New Super Mario Bros.",
+    "platform": "ds",
+    "ctrProductCode": "CTR-P-ABEP",
+    "tid": "000400000007AF00",
+    "coverUrl": "https://art.gametdb.com/ds/box/US/ABEP.png",
+    "coverSource": "gametdb"
+  }
+}
