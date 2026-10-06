@@ -1,8 +1,39 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "astro",
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
+  "services": {
+    "site": {
+      "root": "site",
+      "framework": "astro",
+      "buildCommand": "npm run build",
+      "bindings": [
+        {
+          "type": "service",
+          "service": "api",
+          "format": "url",
+          "env": "API_URL"
+        }
+      ]
+    },
+    "api": {
+      "root": ".",
+      "runtime": "python",
+      "entrypoint": "api/index.py"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "api"
+      }
+    },
+    {
+      "source": "/(.*)",
+      "destination": {
+        "service": "site"
+      }
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -30,15 +61,6 @@
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://art.gametdb.com https://api.nlib.cc https://assets.nintendo.com https://img-eshop.cdn.nintendo.net https://raw.githubusercontent.com; font-src 'self'; connect-src 'self'; frame-ancestors 'none';"
-        }
-      ]
-    },
-    {
-      "source": "/_astro/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
         }
       ]
     }
