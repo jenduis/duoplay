@@ -1,0 +1,278 @@
+# Curated 3DS / DS single-card Download Play multiplayer.
+#
+# Every entry here sets coop.downloadPlay = true in the final dataset (precedence: above Co-Optimus).
+# Fields:
+#   title, platform (3ds|ds), downloadPlay, maxPlayers, mode (coop|versus|both),
+#   notes   — what guests get / limitations
+#   source  — reference page to confirm against (Nintendo manual/support, or a reputable wiki)
+#   verify  — true = NOT yet confirmed by a human; pipeline still imports it but lists it under
+#             "needs review" in data/build/report.md and validate.py prints the count.
+#
+# Entries with verify: false were corroborated by two independent references during Step 2;
+# a human should still spot-check the source pages (see plan → Manual verification).
+#
+# Known NON-supporters (do not add): Super Smash Bros. for Nintendo 3DS, New Super Mario Bros. 2,
+# Kid Icarus: Uprising, Monster Hunter 4 Ultimate (each player needs their own copy).
+
+# ---------------------------------------------------------------- 3DS
+- title: Mario Kart 7
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 8
+  mode: versus
+  notes: Guests can race on all tracks but always play as Shy Guy.
+  source: https://www.mariowiki.com/Mario_Kart_7
+  verify: false
+
+- title: "The Legend of Zelda: Tri Force Heroes"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 3
+  mode: coop
+  notes: Full 3-player co-op campaign with a single game card (guests have limited outfits/saving).
+  source: https://zelda.fandom.com/wiki/The_Legend_of_Zelda:_Tri_Force_Heroes
+  verify: false
+
+- title: "Luigi's Mansion: Dark Moon"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: coop
+  notes: Guests can join the co-op ScareScraper tower mode.
+  source: https://www.mariowiki.com/Luigi%27s_Mansion:_Dark_Moon
+  verify: false
+
+- title: "Luigi's Mansion"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: coop
+  notes: 2018 remake; second player controls Gooigi.
+  source: https://www.mariowiki.com/Luigi%27s_Mansion_(Nintendo_3DS)
+  verify: true
+
+- title: "Kirby: Planet Robobot"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: coop
+  notes: Team Kirby Clash sub-game supports Download Play.
+  source: https://wikirby.com/wiki/Kirby:_Planet_Robobot
+  verify: false
+
+- title: "Kirby: Triple Deluxe"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: Kirby Fighters sub-game supports Download Play.
+  source: https://wikirby.com/wiki/Kirby:_Triple_Deluxe
+  verify: true
+
+- title: Kirby Fighters Deluxe
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: both
+  notes: Standalone eShop release.
+  source: https://wikirby.com/wiki/Kirby_Fighters_Deluxe
+  verify: false
+
+- title: "Mario Party: Island Tour"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: All board/minigame multiplayer playable with one card.
+  source: https://www.mariowiki.com/Mario_Party:_Island_Tour
+  verify: false
+
+- title: "Mario Party: Star Rush"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: Guests can also use the free Mario Party Star Rush Party Guest app.
+  source: https://www.mariowiki.com/Mario_Party:_Star_Rush
+  verify: false
+
+- title: "Mario Party: The Top 100"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: ""
+  source: https://www.mariowiki.com/Mario_Party:_The_Top_100
+  verify: true
+
+- title: Mario Tennis Open
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: both
+  notes: Doubles can be played co-op.
+  source: https://www.mariowiki.com/Mario_Tennis_Open
+  verify: false
+
+- title: Star Fox 64 3D
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: Battle mode only; campaign is single-player.
+  source: https://starfox.fandom.com/wiki/Star_Fox_64_3D
+  verify: false
+
+- title: "Super Street Fighter IV: 3D Edition"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: versus
+  notes: Guests are limited to a single character.
+  source: https://streetfighter.fandom.com/wiki/Super_Street_Fighter_IV:_3D_Edition
+  verify: false
+
+- title: Rhythm Heaven Megamix
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: both
+  notes: Multiplayer rhythm games.
+  source: https://rhythmheaven.fandom.com/wiki/Rhythm_Heaven_Megamix
+  verify: true
+
+- title: Tetris Axis
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 8
+  mode: versus
+  notes: ""
+  source: https://tetris.wiki/Tetris_Axis
+  verify: false
+
+- title: Tetris Ultimate
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: ""
+  source: https://tetris.wiki/Tetris_Ultimate
+  verify: true
+
+- title: "Dr. Mario: Miracle Cure"
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: versus
+  notes: eShop release.
+  source: https://www.mariowiki.com/Dr._Mario:_Miracle_Cure
+  verify: false
+
+- title: Mario & Sonic at the London 2012 Olympic Games
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: ""
+  source: https://www.mariowiki.com/Mario_%26_Sonic_at_the_London_2012_Olympic_Games
+  verify: true
+
+- title: Mario Golf: World Tour
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: ""
+  source: https://www.mariowiki.com/Mario_Golf:_World_Tour
+  verify: true
+
+- title: 3D Streets of Rage 2
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: coop
+  notes: SEGA 3D Classics eShop release; 2-player beat-'em-up co-op.
+  source: https://segaretro.org/3D_Streets_of_Rage_2
+  verify: false
+
+- title: Freakyforms Deluxe: Your Creations, Alive!
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: both
+  notes: ""
+  source: https://en.wikipedia.org/wiki/Freakyforms
+  verify: true
+
+- title: Puzzle & Dragons Z + Puzzle & Dragons Super Mario Bros. Edition
+  platform: 3ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: versus
+  notes: ""
+  source: https://www.mariowiki.com/Puzzle_%26_Dragons:_Super_Mario_Bros._Edition
+  verify: true
+
+# ---------------------------------------------------------------- DS (plays on 3DS)
+- title: Mario Kart DS
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 8
+  mode: versus
+  notes: Single-card guests play as Shy Guy on a limited track set.
+  source: https://www.mariowiki.com/Mario_Kart_DS
+  verify: false
+
+- title: New Super Mario Bros.
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 2
+  mode: versus
+  notes: Mario vs. Luigi mode and minigames only; no co-op campaign.
+  source: https://www.mariowiki.com/New_Super_Mario_Bros.
+  verify: false
+
+- title: Super Mario 64 DS
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: VS mode only.
+  source: https://www.mariowiki.com/Super_Mario_64_DS
+  verify: false
+
+- title: Mario Party DS
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: ""
+  source: https://www.mariowiki.com/Mario_Party_DS
+  verify: true
+
+- title: Tetris DS
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 10
+  mode: versus
+  notes: ""
+  source: https://tetris.wiki/Tetris_DS
+  verify: false
+
+- title: Clubhouse Games
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 8
+  mode: versus
+  notes: Known as 42 All-Time Classics in Europe.
+  source: https://en.wikipedia.org/wiki/Clubhouse_Games
+  verify: true
+
+- title: Metroid Prime Hunters
+  platform: ds
+  downloadPlay: true
+  maxPlayers: 4
+  mode: versus
+  notes: Single-card play is limited to one arena/character.
+  source: https://www.metroidwiki.org/wiki/Metroid_Prime_Hunters
+  verify: true
