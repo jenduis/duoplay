@@ -1,0 +1,52 @@
+[
+  {
+    "title": "It Takes Two",
+    "system": "switch",
+    "url": "https://www.co-optimus.com/game/11728/nintendo-switch/it-takes-two.html",
+    "release_date": "11/04/2022",
+    "columns": ["It Takes Two", "2", "2", "11/04/2022", "5.0"],
+    "features": ["Co-Op Campaign", "Split Screen", "Drop-In/Drop-Out"],
+    "details": "It Takes Two | Couch Co-Op: 2 | Online Co-Op: 2 | Co-Op Campaign | Split Screen | Drop-In/Drop-Out",
+    "page": 1
+  },
+  {
+    "title": "Mario Kart 8 Deluxe",
+    "system": "switch",
+    "url": "https://www.co-optimus.com/game/4480/nintendo-switch/mario-kart-8-deluxe.html",
+    "release_date": "04/28/2017",
+    "columns": ["Mario Kart 8 Deluxe", "4", "12", "04/28/2017", "4.5"],
+    "features": ["Same-Screen", "Split Screen"],
+    "details": "Mario Kart 8 Deluxe | Couch Co-Op: 4 | Online Co-Op: 12 | Same-Screen | Split Screen",
+    "page": 1
+  },
+  {
+    "title": "Luigi's Mansion: Dark Moon",
+    "system": "3ds",
+    "url": "https://www.co-optimus.com/game/2397/nintendo-3ds/luigi-s-mansion-dark-moon.html",
+    "release_date": "03/24/2013",
+    "columns": ["Luigi's Mansion: Dark Moon", "4", "4", "03/24/2013", "4.0"],
+    "features": ["Co-Op Campaign", "Local Wireless"],
+    "details": "Luigi's Mansion: Dark Moon | Couch Co-Op: 4 | Online Co-Op: 4 | Co-Op Campaign",
+    "page": 1
+  },
+  {
+    "title": "Super Mario 3D World + Bowser's Fury",
+    "system": "switch",
+    "url": "https://www.co-optimus.com/game/6500/nintendo-switch/super-mario-3d-world-plus-bowser-s-fury.html",
+    "release_date": "02/12/2021",
+    "columns": ["Super Mario 3D World + Bowser's Fury", "4", "4", "02/12/2021", "4.8"],
+    "features": ["Co-Op Campaign", "Same-Screen", "Drop-In/Drop-Out"],
+    "details": "Super Mario 3D World + Bowser's Fury | Couch Co-Op: 4 | Online Co-Op: 4 | Co-Op Campaign | Same-Screen | Drop-In/Drop-Out",
+    "page": 1
+  },
+  {
+    "title": "Unknown Mystery Co-Op",
+    "system": "switch",
+    "url": "https://www.co-optimus.com/game/9999/unknown.html",
+    "release_date": "01/01/2025",
+    "columns": ["Unknown Mystery Co-Op", "Unknown", "Unknown", "01/01/2025", "N/A"],
+    "features": [],
+    "details": "Unknown Mystery Co-Op | No details available",
+    "page": 1
+  }
+]

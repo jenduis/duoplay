@@ -49,6 +49,7 @@
 
   banner.innerText = `Done! Saving ${finalGames.length} unique games...`;
 
+  // 1. Download JSON
   const blob = new Blob([JSON.stringify(finalGames, null, 2)], { type: "application/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -56,6 +57,16 @@
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
+
+  // 2. Download plain text list of titles (sorted)
+  const titlesList = finalGames.map(g => g.title).sort().join("\n");
+  const txtBlob = new Blob([titlesList], { type: "text/plain;charset=utf-8;" });
+  const aTxt = document.createElement("a");
+  aTxt.href = URL.createObjectURL(txtBlob);
+  aTxt.download = "backloggd_titles.txt";
+  document.body.appendChild(aTxt);
+  aTxt.click();
+  document.body.removeChild(aTxt);
 
   setTimeout(() => banner.remove(), 4000);
 })();
