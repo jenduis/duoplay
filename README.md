@@ -1,6 +1,6 @@
 # DuoPlay — Nintendo Switch & 3DS Co-Op Finder
 
-**DuoPlay** (`https://duoplay.vercel.app`) is a fast, static website listing **Nintendo Switch, Switch 2, Nintendo 3DS, and Nintendo DS cooperative & multiplayer games**, with a dedicated static page for every title.
+**DuoPlay** (`swoyun.vercel.app`) is a fast, static website listing **Nintendo Switch, Switch 2, Nintendo 3DS, and Nintendo DS cooperative & multiplayer games**, with a dedicated static page for every title.
 
 Data is gathered from verified community archives and normalized via a reproducible Python pipeline. Gemini is utilized strictly for editorial prose (summaries, co-op mechanics breakdowns, and setup guides)—never for hallucinating factual player counts or hardware support.
 
@@ -102,4 +102,4 @@ The site is configured for zero-configuration static deployment to Vercel:
 - **Framework Preset**: `Astro`
 - **Build Command**: `npm run build`
 - **Output Directory**: `dist`
-- **Environment Variable**: `SITE_URL` (default: `https://duoplay.vercel.app`)
+- **Environment Variable**: `SITE_URL` (default: `swoyun.vercel.app`)
